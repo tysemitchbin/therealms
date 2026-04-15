@@ -37,23 +37,23 @@ canvas#bg {
   max-width:940px; margin:0 auto;
   padding:52px 20px 90px;
 }
-
+ 
 /* HEADER */
 .header { text-align:center; margin-bottom:44px; animation: riseIn 1.3s cubic-bezier(.16,1,.3,1) both; }
 @keyframes riseIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
-
+ 
 .moon-glyph { display:block; margin:0 auto 22px; width:120px; height:120px; animation:floatMoon 7s ease-in-out infinite; }
 @keyframes floatMoon { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
-
+ 
 .eyebrow { font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.28em; color:#b0ccee; text-transform:uppercase; margin-bottom:14px; }
 .main-title { font-family:'Cinzel Decorative',serif; font-size:clamp(24px,5.5vw,52px); font-weight:700; color:var(--gold-light); line-height:1.1; margin-bottom:10px; text-shadow:0 0 60px rgba(212,168,67,0.5),0 0 120px rgba(212,168,67,0.2); }
 .sub-title { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; font-weight:300; color:var(--silver); letter-spacing:0.04em; margin-bottom:24px; }
-
+ 
 .star-div { display:flex; align-items:center; justify-content:center; gap:10px; max-width:300px; margin:0 auto; }
 .star-div-line { flex:1; height:1px; background:linear-gradient(to right,transparent,var(--gold-dim)); }
 .star-div-line.r { background:linear-gradient(to left,transparent,var(--gold-dim)); }
 .star-div-dot { width:4px;height:4px;background:var(--gold);border-radius:50%;box-shadow:0 0 6px var(--gold); }
-
+ 
 /* SCROLL */
 .prophecy-scroll {
   background:rgba(38,54,110,0.97); border:1px solid rgba(212,168,67,0.35); border-radius:14px;
@@ -71,7 +71,7 @@ canvas#bg {
 .phase-full { background:var(--gold);box-shadow:0 0 12px rgba(212,168,67,0.6); }
 .prophecy-scroll p { font-size:17px;line-height:1.9;color:#ddeeff;font-style:italic;font-weight:400; }
 .prophecy-scroll strong { font-style:normal;font-weight:700;color:var(--gold-light); }
-
+ 
 /* ORACLE PANEL */
 .oracle-panel {
   background:rgba(38,54,110,0.97); border:1px solid rgba(212,168,67,0.25); border-radius:18px;
@@ -79,21 +79,21 @@ canvas#bg {
   box-shadow:0 0 80px rgba(80,100,200,0.15),inset 0 1px 0 rgba(255,255,255,0.07);
   animation:riseIn 1.3s cubic-bezier(.16,1,.3,1) 0.25s both;
 }
-
+ 
 /* MODE TOGGLE */
 .mode-toggle { display:flex;width:fit-content;margin:0 auto 28px;border:1px solid rgba(212,168,67,0.35);border-radius:30px;overflow:hidden; }
 .mode-btn { padding:9px 28px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.14em;cursor:pointer;border:none;background:transparent;color:#b0ccee;transition:all .25s; }
 .mode-btn.active { background:rgba(212,168,67,0.18);color:var(--gold-light); }
 .mode-btn:hover:not(.active) { color:#ddeeff; }
-
+ 
 /* GENRE TABS */
 .genre-tabs { display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px; }
 .genre-tab { padding:7px 18px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.1em;border:1px solid rgba(200,216,240,0.28);border-radius:20px;cursor:pointer;background:transparent;color:#b0ccee;transition:all .2s; }
 .genre-tab.active { background:rgba(196,176,248,0.2);color:#e0d4ff;border-color:rgba(196,176,248,0.55); }
 .genre-tab:hover:not(.active) { border-color:rgba(200,216,240,0.5);color:#ddeeff; }
-
+ 
 .chaos-note { text-align:center;font-style:italic;font-size:17px;color:#b0ccee;margin-bottom:28px;font-weight:400; }
-
+ 
 /* WHEELS */
 .wheels-row { display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:32px; }
 .wheel-wrap { display:flex;flex-direction:column;align-items:center;gap:8px; }
@@ -107,13 +107,16 @@ canvas#bg {
 .spin-single-btn { padding:6px 16px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid rgba(212,168,67,0.35);border-radius:20px;background:transparent;color:#b0ccee;transition:all .2s; }
 .spin-single-btn:hover { color:var(--gold-light);border-color:rgba(212,168,67,0.6); }
 .spin-single-btn:disabled { opacity:0.3;cursor:not-allowed; }
-
+ 
 /* CONSULT BTN */
-.btn-row { display:flex;justify-content:center;margin-bottom:28px; }
+.btn-row { display:flex;justify-content:center;gap:14px;margin-bottom:28px;flex-wrap:wrap; }
 .consult-btn { position:relative;padding:16px 56px;font-family:'Cinzel Decorative',serif;font-size:14px;letter-spacing:0.1em;cursor:pointer;border:1px solid rgba(212,168,67,0.45);border-radius:40px;background:rgba(212,168,67,0.08);color:var(--gold-light);transition:all .3s;overflow:hidden; }
 .consult-btn:hover { border-color:var(--gold);color:var(--gold-pale);background:rgba(212,168,67,0.14);box-shadow:0 0 40px rgba(212,168,67,0.15); }
 .consult-btn:disabled { opacity:0.35;cursor:not-allowed; }
-
+.wildcard-btn { padding:16px 32px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:0.1em;cursor:pointer;border:1px solid rgba(196,176,248,0.45);border-radius:40px;background:rgba(196,176,248,0.08);color:var(--lavender);transition:all .3s; }
+.wildcard-btn:hover { border-color:var(--lavender);background:rgba(196,176,248,0.15);box-shadow:0 0 40px rgba(196,176,248,0.15); }
+.wildcard-btn:disabled { opacity:0.35;cursor:not-allowed; }
+ 
 /* RESULT */
 .result-box { display:none;border:1px solid rgba(212,168,67,0.4);border-radius:14px;padding:32px 28px;text-align:center;background:rgba(30,46,100,0.99);box-shadow:0 0 80px rgba(212,168,67,0.12),inset 0 1px 0 rgba(255,255,255,0.07);animation:resultIn .7s cubic-bezier(.16,1,.3,1) both; }
 @keyframes resultIn { from{opacity:0;transform:scale(.95) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
@@ -126,10 +129,10 @@ canvas#bg {
 .result-name { font-family:'Cinzel Decorative',serif;font-size:clamp(16px,3.5vw,30px);font-weight:700;color:var(--gold-light);line-height:1.3;margin-bottom:20px;text-shadow:0 0 40px rgba(212,168,67,0.6),0 0 80px rgba(212,168,67,0.2); }
 .reset-btn { font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;color:#b0ccee;background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:4px;transition:color .2s; }
 .reset-btn:hover { color:#ddeeff; }
-
+ 
 /* FOOTER */
 .footer { text-align:center;margin-top:52px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.2em;color:rgba(180,210,255,0.7); }
-
+ 
 /* SPARKLES */
 .sparkle { position:fixed;border-radius:50%;pointer-events:none;animation:sparkleOut .9s ease-out forwards;z-index:999; }
 @keyframes sparkleOut { 0%{opacity:1;transform:translate(0,0) scale(1)} 100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0)} }
@@ -138,7 +141,7 @@ canvas#bg {
 <body>
 <canvas id="bg"></canvas>
 <div class="page-wrap">
-
+ 
   <!-- HEADER -->
   <div class="header">
     <svg class="moon-glyph" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -179,7 +182,7 @@ canvas#bg {
       <line x1="57" y1="98.5" x2="58.5" y2="98.5" stroke="#c9943a" stroke-width="0.7" opacity="0.6"/>
       <line x1="61.5" y1="98.5" x2="63" y2="98.5" stroke="#c9943a" stroke-width="0.7" opacity="0.6"/>
     </svg>
-
+ 
     <div class="eyebrow">The Royal Baby Shower · Anno Domini MMXXVI</div>
     <div class="main-title">The Oracle of Names</div>
     <div class="sub-title">Consults the Ancient Oracle · Seek Inspiration · Pin Thy Prophecy</div>
@@ -191,7 +194,7 @@ canvas#bg {
       <div class="star-div-line r"></div>
     </div>
   </div>
-
+ 
   <!-- PROPHECY SCROLL -->
   <div class="prophecy-scroll">
     <div class="moon-phases">
@@ -207,7 +210,7 @@ canvas#bg {
     </div>
     <p>Hear ye, all assembled guests of the realm. You are hereby called upon to submit a <strong>secret code name</strong> for the Royal Heir. Consult the Oracle for inspiration — spin the wheels as many times as you wish. Then write your finest suggestions upon a scroll and <strong>pin it to the Prophecy Board</strong>. Vote on the prophecy for the best names for the prince. At the hour of reckoning, <strong>Her Majesty and her concubine</strong> shall choose the name that shall follow this child through legend.</p>
   </div>
-
+ 
   <!-- ORACLE PANEL -->
   <div class="oracle-panel">
     <div style="text-align:center;margin-bottom:6px;">
@@ -221,6 +224,7 @@ canvas#bg {
     <div class="wheels-row" id="wheelsRow"></div>
     <div class="btn-row">
       <button class="consult-btn" id="spinAllBtn" onclick="spinAll()">✦ Consult the Oracle ✦</button>
+      <button class="wildcard-btn" id="wildcardBtn" onclick="spinWildcard()">🎲 Wildcard</button>
     </div>
     <div class="result-box" id="resultBox">
       <div class="result-stars">
@@ -233,22 +237,22 @@ canvas#bg {
       <button class="reset-btn" onclick="resetAll()">Spin the wheels again</button>
     </div>
   </div>
-
+ 
   <div class="footer">The Prophecy Is Fulfilled &nbsp;·&nbsp; Eidsvoll, Norway &nbsp;·&nbsp; MMXXVI</div>
 </div>
-
+ 
 <script>
 /* CANVAS STARFIELD */
 const canvas = document.getElementById('bg');
 const ctx = canvas.getContext('2d');
 let W, H, stars = [], consts = [];
-
+ 
 function resize() {
   W = canvas.width = window.innerWidth;
   H = canvas.height = window.innerHeight;
   initStars();
 }
-
+ 
 function initStars() {
   stars = [];
   for (let i = 0; i < 260; i++) {
@@ -268,7 +272,7 @@ function initStars() {
     consts.push(pts);
   }
 }
-
+ 
 function drawBg(t) {
   ctx.clearRect(0,0,W,H);
   ctx.fillStyle='#1a2240'; ctx.fillRect(0,0,W,H);
@@ -295,67 +299,113 @@ function drawBg(t) {
   });
   ctx.globalAlpha=1;
 }
-
+ 
 window.addEventListener('resize',resize);
 resize();
 (function loop(t){ drawBg(t*.001); requestAnimationFrame(loop); })(0);
-
+ 
+/* WILDCARD POOLS — guaranteed funny, one per wheel slot */
+const WILDCARDS = {
+  "Ren Faire": [
+    ["Squire","His Portliness","The Adequate","Grand Master","Thane"],
+    ["Wobbly","Rotund","Bumbling","Bedraggled","Cantankerous"],
+    ["Cabbage","Turnip","Crayfish","Dormouse","Puffin"],
+    ["the Colicky","the Sock-remover","Muddyboots","the Flatulent","the Adequate"]
+  ],
+  "Spy": [
+    ["Pudding","Binky","Nappy","Snooze","Drool"],
+    ["Soggy","Colicky","Nap-time","Wobbly","Gassy"],
+    ["Biscuit","Blanket","Dummy","Rattle","Mittens"]
+  ],
+  "Pirate": [
+    ["Soggybottom","Bluntspoon","Crybones","Dunmore","Coldvale"],
+    ["Nappyrash","Milkbreath","Wobblegut","Snivelnose","Soggyhat"],
+    ["the Colicky","the Bedtime-negotiator","the Crayon-eater","the Gassy","the Unsatisfied"]
+  ],
+  "Gladiator": [
+    ["Drooly","Pudgy","Wobbly","Gummy","Swaddled"],
+    ["Tantrum-thrower","Puddle-stomper","Burp-champion","Crayon-eater","Sock-remover"],
+    ["the Nap Room","the Snack Table","the Soggy Nappy","the Biscuit Tin","the Changing Table"]
+  ],
+  "Athlete": [
+    ["Drooly","Wobbly","Pudgy","Gummy","Napping"],
+    ["Nap-time","Snack-powered","Soggy","Colicky","Biscuit"],
+    ["Pudding-face","Sock-remover","Tantrum-thrower","Mud-roller","Crayon-eater"]
+  ],
+  "Viking": [
+    ["Wobblefoot","Binky-thief","Snorrington","Dribblesson","Nappybeard"],
+    ["Runny-nosed","Crayon-eater","Sock-remover","Nap-taker","Puddle-stomper"],
+    ["of the Soggy Nappy","of the Snack Cupboard","of the Biscuit Tin","of the Midnight Wailing","of the Lost Sock"]
+  ],
+  "Lord of the Rings": [
+    ["Binkyûl","Dribblûrn","Nappyak","Soggimor","Blankûth"],
+    ["Nap-keeper","Snack-warden","Biscuit-bearer","Drool-steward","Sock-warden"],
+    ["of the Soggy Blanket","of the Lost Dummy","of the Midnight Screaming","of the Biscuit Crumbs","of the Nappy Change"],
+    ["Biscuit Crumb Hollow","The Soggy Changing Table","Nap Room of Despair","The Lost Sock Vale","Midnight Wailing Peak"]
+  ],
+  "Western": [
+    ["Mudd","Blunder","Dribble","Nappkins","Sogsworth"],
+    ["the Colicky","the Snoring","the Bewildered","the Forgetful","the Gassy"],
+    ["Mud-roller","Shoelace-ignorer","Crayon-eater","Yellowbelly","Rapscallion"]
+  ]
+};
+ 
 /* WHEEL DATA */
 const GENRES = {
   "Ren Faire": { wheels: [
-    {label:"Title", items:["Lord","Sir","Baron","Duke","Count","The Great","Prince","Earl","Viscount","Marquess","Squire","Knight","His Grace","The Bold","His Lordship"]},
-    {label:"Adjective", items:["Thunderous","Golden","Ancient","Fierce","Slumbering","Mighty","Wobbly","Radiant","Grumpy","Valiant","Fearsome","Boisterous","Wandering","Peculiar","Steadfast"]},
-    {label:"Creature", items:["Badger","Wyrm","Falcon","Hedgehog","Cabbage","Raven","Marmot","Elk","Boar","Newt","Weasel","Toad","Lynx","Stoat","Cormorant"]},
-    {label:"Epithet", items:["of Eidsvoll","the Bold","of the North","the Unslept","of Fosen","the Loud","Ironbelly","Snowborn","the Hungry","of Legend","the Wobbly","of the Realm","Twice-Born","the Stubborn","of Jotunheimen"]}
+    {label:"Title", items:["Lord","Sir","Baron","Duke","Count","The Great","Prince","Earl","Viscount","Marquess","Squire","Knight","His Grace","The Bold","His Lordship","Master","Thane","Liege","Chieftain","Warlord","Sovereign","Regent","Herald","Steward","Champion","Protector","Keeper","Overlord","High Lord","Grand Master"]},
+    {label:"Adjective", items:["Thunderous","Golden","Ancient","Fierce","Slumbering","Mighty","Wobbly","Radiant","Grumpy","Valiant","Fearsome","Boisterous","Wandering","Peculiar","Steadfast","Grizzled","Pompous","Reckless","Portly","Disheveled","Bellowing","Stout","Weary","Cantankerous","Magnificent","Illustrious","Rotund","Bumbling","Stalwart","Bedraggled"]},
+    {label:"Creature", items:["Badger","Wyrm","Falcon","Hedgehog","Cabbage","Raven","Marmot","Elk","Boar","Newt","Weasel","Toad","Lynx","Stoat","Cormorant","Ferret","Otter","Vole","Osprey","Salamander","Magpie","Puffin","Dormouse","Jackdaw","Quail","Moorhen","Roach","Bream","Crayfish","Turnip"]},
+    {label:"Epithet", items:["of Eidsvoll","the Bold","of the North","the Unslept","of Fosen","the Loud","Ironbelly","Snowborn","the Hungry","of Legend","the Wobbly","of the Realm","Twice-Born","the Stubborn","of Jotunheimen","the Unwashed","of the Vale","the Flatulent","of the Moor","Copperknees","the Bewildered","of the Fog","Thrice-Wed","the Adequate","of the Marsh","Barleycorn","the Suspicious","Muddyboots","the Colicky","the Sock-remover"]}
   ]},
   "Spy": { wheels: [
-    {label:"Codename", items:["Ghost","Cipher","Phantom","Shadow","Specter","Vortex","Eclipse","Mirage","Wraith","Vector","Nexus","Zenith","Tempest","Obsidian","Cobalt"]},
-    {label:"Adjective", items:["Silent","Midnight","Covert","Double","Black","Deep","Burning","Crimson","Iron","Frozen","Phantom","Hidden","Rogue","Sleeper","Dark"]},
-    {label:"Animal", items:["Fox","Viper","Falcon","Mamba","Cobra","Wolf","Lynx","Condor","Raven","Shark","Mantis","Mongoose","Jaguar","Asp","Osprey"]}
+    {label:"Noun 1", items:["Eagle","Raven","Wolf","Bear","Falcon","Ghost","Thunder","Iron","Cipher","Shadow","Specter","Cobra","Titan","Viper","Phantom","Dagger","Wraith","Lynx","Steel","Hammer","Jackal","Obsidian","Condor","Mongoose","Havoc","Reaper","Saber","Scorpion","Tempest","Glacier"]},
+    {label:"Noun 2", items:["Wind","Fire","Rain","Ice","Stone","Tide","Smoke","Frost","Ash","Blade","Night","Dawn","Drift","Flood","Gate","Vault","Signal","Chain","Pulse","Current","Ember","Flare","Breach","Hollow","Ridge","Surge","Coil","Wreck","Fuse","Arc"]},
+    {label:"Modifier", items:["Six","Seven","Nine","Twelve","Zero","North","South","East","West","Black","Crimson","Silver","Gold","Omega","Alpha","Delta","Bravo","Niner","Midnight","Ultraviolet","Cobalt","Scarlet","White","Echo","Foxtrot","Tango","One","Thirteen","Red","Deep"]}
   ]},
   "Pirate": { wheels: [
-    {label:"The", items:["Dread","Terrible","Mighty","Infamous","Fearsome","Wild","Cunning","Bold","Iron","Mad","Cursed","Black","Scarlet","Salty","Merciless"]},
-    {label:"Adjective", items:["One-Eyed","Barnacled","Shipwrecked","Rum-soaked","Fearless","Iron-jawed","Tattooed","Weathered","Scurvy","Storm-born","Bearded","Toothless","Sunburned","Wily","Scoundrel"]},
-    {label:"Noun", items:["Kraken","Cutlass","Doubloon","Broadsword","Cannon","Maelstrom","Galleon","Plunderer","Marauder","Swashbuckler","Brigand","Corsair","Buccaneer","Freebooter","Rapscallion"]}
+    {label:"Name", items:["Blackbeard","Flint","Grimshaw","Morrow","Cragmore","Duskwell","Crowbone","Brimstone","Copperhead","Ironside","Greymantle","Redcoat","Steelbones","Driftwood","Ashmore","Brackwell","Coldwater","Flintlock","Mossgrip","Ravenscroft","Gallows","Tidewreck","Saltmoor","Dunrock","Ironmaw","Blackwater","Grimtide","Stormcrow","Dunmore","Coldvale"]},
+    {label:"Nickname", items:["Ironjaw","Saltfist","Blacktooth","Stoneheart","Deadeye","Crookhook","Boneclaw","Splitbeard","Mudboot","Hollowhand","Silverbelly","Barnacleface","Wetboot","Puddingfist","Crybones","Snoringson","Rottenskull","Copperback","Nappyrash","Milkbreath","Rustgut","Flatfoot","Soggyhat","Brokennose","Saltyknee","Bluntspoon","Driftwhisker","Greasechin","Wobblegut","Snivelnose"]},
+    {label:"the...", items:["the Merciless","the Cursed","the Feared","the Infamous","the Undying","the Ruthless","the Undefeated","the Wretched","the Dreaded","the Forsaken","the Unyielding","the Terrible","the Mighty","the Mad","the Relentless","the Gassy","the Unslept","the Colicky","the Howling","the Unsatisfied","the Soggy","the Bewildered","the Adequate","the Smelly","the Hungry","the Stubborn","the Loud","the Wobbly","the Bedtime-negotiator","the Crayon-eater"]}
   ]},
   "Gladiator": { wheels: [
-    {label:"The", items:["Undefeated","Iron","Burning","Stone","Savage","Thunder","Golden","Steel","Crimson","Eternal","Undying","Ferocious","Mighty","Ancient","Relentless"]},
-    {label:"Adjective", items:["Blood-soaked","Scarred","Fearless","Roaring","Thundering","Crushing","Raging","Towering","Merciless","Unbroken","Howling","Blazing","Unstoppable","Iron-fisted","Battle-worn"]},
-    {label:"Noun", items:["Fist","Hammer","Lion","Bull","Titan","Wolf","Crusher","Blade","Shield","Colossus","Destroyer","Conqueror","Champion","Juggernaut","Warlord"]}
+    {label:"Adjective", items:["Iron","Golden","Burning","Stone","Savage","Thundering","Crimson","Eternal","Ferocious","Mighty","Ancient","Relentless","Undying","Scarred","Blood-soaked","Raging","Fearless","Howling","Unbroken","Untamed","Merciless","Unyielding","Blazing","Roaring","Towering","Unstoppable","Battle-worn","Cursed","Drooly","Pudgy"]},
+    {label:"Noun", items:["Fist","Hammer","Lion","Bull","Titan","Wolf","Crusher","Blade","Colossus","Destroyer","Conqueror","Champion","Juggernaut","Warlord","Gladiator","Brute","Berserker","Slayer","Vanquisher","Ravager","Decimator","Executioner","Mauler","Annihilator","Butcher","Marauder","Pillager","Tantrum-thrower","Puddle-stomper","Burp-champion"]},
+    {label:"of the...", items:["the Colosseum","the Arena","the Sands","the Pit","Rome","Carthage","the North","the Empire","the Eternal City","the Blood Pits","the Golden Ring","the Iron Gates","the Roaring Crowd","the Fallen","the Unconquered","the Ancient Games","the First Legion","the Last Stand","the Burning Coast","the Gladiator Kings","the Eastern Front","the Western Reaches","the Outer Provinces","the Slave Markets","the Forgotten Dungeons","the Iron Throne","the Screaming Masses","the Dying Light","the Nap Room","the Snack Table"]}
   ]},
   "Athlete": { wheels: [
-    {label:"The", items:["Flying","Iron","Bullet","Electric","Golden","Blazing","Unstoppable","Legendary","Mighty","Raging","Swift","Fearless","Invincible","Thundering","Relentless"]},
-    {label:"Adjective", items:["Turbo","Hyper","Super","Ultra","Mega","Thunder","Lightning","Power","Nitro","Rocket","Warp","Blaze","Storm","Cannon","Flash"]},
-    {label:"Noun", items:["Machine","Express","Hammer","Rocket","Missile","Freight Train","Dynamo","Torpedo","Juggernaut","Cannonball","Titan","Cyclone","Thunderbolt","Avalanche","Colossus"]}
+    {label:"The", items:["Flying","Iron","Bullet","Electric","Golden","Blazing","Unstoppable","Legendary","Mighty","Raging","Swift","Fearless","Invincible","Thundering","Relentless","Savage","Furious","Undefeated","Dominant","Explosive","Ferocious","Untouchable","Merciless","Supreme","Reckless","Primal","Raw","Absolute","Drooly","Wobbly"]},
+    {label:"Adjective", items:["Turbo","Hyper","Super","Ultra","Mega","Thunder","Lightning","Power","Nitro","Rocket","Warp","Blaze","Storm","Cannon","Flash","Surge","Overdrive","Maximum","Prime","Apex","Peak","Elite","Force","Rapid","Charge","Boost","Drive","Burn","Nap-time","Snack-powered"]},
+    {label:"Noun", items:["Machine","Express","Hammer","Rocket","Missile","Freight Train","Dynamo","Torpedo","Juggernaut","Cannonball","Titan","Cyclone","Thunderbolt","Avalanche","Colossus","Locomotive","Wrecking Ball","Battering Ram","Inferno","Tsunami","Earthquake","Supernova","Shockwave","Firestorm","Landslide","Tidal Wave","Demolisher","Destroyer","Pudding-face","Sock-remover"]}
   ]},
   "Viking": { wheels: [
-    {label:"Given Name", items:["Bjorn","Ulf","Ragnar","Leif","Gunnar","Ivar","Thorvald","Halvard","Erik","Sigurd","Olaf","Harald","Rollo","Knut","Torsten"]},
-    {label:"the", items:["Fearless","Ironside","Stormbringer","Axe-hand","Seafarer","Skullbreaker","Farwalker","Bonecrusher","Frostborn","Thunderous","Wanderer","Unyielding","Firebrand","Pathfinder","Bloodaxe"]},
-    {label:"of", items:["of Valhalla","of the Fjords","of the Longship","of Midgard","of the Storm","of the Saga","of the North Sea","of the Raid","of Asgard","of the Mead Hall","of the Frozen Deep","of the Iron Shore","of the Grey Mountains","of the Ancient Ways","of Jotunheimen"]}
+    {label:"Given Name", items:["Bjorn","Ulf","Ragnar","Leif","Gunnar","Ivar","Thorvald","Halvard","Erik","Sigurd","Olaf","Harald","Rollo","Knut","Torsten","Sven","Asmund","Gorm","Haldor","Ingvar","Ketil","Magnus","Njord","Orm","Rolf","Skari","Trond","Vidar","Wobblefoot","Binky-thief"]},
+    {label:"the", items:["Fearless","Ironside","Stormbringer","Axe-hand","Seafarer","Skullbreaker","Farwalker","Bonecrusher","Frostborn","Thunderous","Wanderer","Unyielding","Firebrand","Pathfinder","Bloodaxe","Wavebreaker","Iceheart","Stonefist","Grimbeard","Longstrider","Deepwater","Shieldbreaker","Nightwalker","Ironbeard","Swordhand","Ravenspeaker","Wolfchaser","Oakenshield","Stormrider","Runny-nosed"]},
+    {label:"of", items:["of Valhalla","of the Fjords","of the Longship","of Midgard","of the Storm","of the Saga","of the North Sea","of the Raid","of Asgard","of the Mead Hall","of the Frozen Deep","of the Iron Shore","of the Grey Mountains","of the Ancient Ways","of Jotunheimen","of the Endless Winter","of the Shattered Shield","of the Burning Village","of the Last Voyage","of the Ice Fields","of the Berserker Clan","of the Raven Banner","of the Dragon Prow","of the Midnight Sun","of the Wolf Pack","of the Broken Oar","of the Far Shore","of the Blood Eagle","of the Soggy Nappy","of the Snack Cupboard"]}
   ]},
   "Lord of the Rings": { wheels: [
-    {label:"Name", items:["Aldûrion","Gothrimm","Brûnakhor","Thengavar","Eirvoss","Maldûren","Dundavar","Orvindel","Dorrakh","Khumbrul","Grûndavar","Baldûrn","Skarvûl","Morgzeth","Grakhûn","Zûlvarak","Aldric","Thornvast","Edrunn","Casweld","Borromar","Haelvorn","Zorphiel","Vrothûn","Castriel"]},
-    {label:"Title", items:["Shadowlord","Ranger","Ringbearer","Keeper","Wanderer","Guardian","Warden","Steward","Loremaster","Pathfinder","Oathkeeper","Stonebearer","Lightbringer","Thornguard","Ironwarden"]},
-    {label:"of the", items:["of the Ancient","of the Forgotten","of the Burning","of the Misty","of the Hidden","of the Dark","of the Golden","of the Eternal","of the Lost","of the Sundered","of the Hallowed","of the Forsaken","of the Undying","of the Shimmering","of the Iron"]},
-    {label:"Place", items:["Caladrimm","Sylvenmoor","Orvindath","Khundavar","Grûmbolt","Dorrakhûm","Baldûrn Deep","Thengavar Hold","Vrothûn Peak","Dundamûr","Brûnakhold","Skarvûlmor","Grakhûn Wastes","Thornveld","Haelvorn","Morgzeth Pits","Zûlvarak","Caswelmoor","Eirvossen","Maevethor","Liravel","Aelthara","Castrimos","Zorphindel","Orvindath"]}
+    {label:"Name", items:["Caladwen","Sylvaron","Orvindel","Aelthari","Lirathel","Eirvoss","Castriel","Zorphiel","Maevathor","Sylindra","Gothrimm","Brûnakhor","Dorrakh","Khumbrul","Grûndavar","Baldûrn","Dundavar","Vrothûn","Thengavar","Maldûren","Skarvûl","Morgzeth","Grakhûn","Zûlvarak","Gorthak","Aldric","Thornvast","Edrunn","Casweld","Borromar"]},
+    {label:"Title", items:["Shadowlord","Ranger","Ringbearer","Keeper","Wanderer","Guardian","Warden","Steward","Loremaster","Pathfinder","Oathkeeper","Stonebearer","Lightbringer","Thornguard","Ironwarden","Dawnwalker","Grimkeeper","Vaultmaster","Ashbringer","Duskwalker","Flamekeeper","Stormwarden","Ironseeker","Nightguard","Deepwalker","Runekeeper","Emberwarden","Shadowkeeper","Nap-keeper","Snack-warden"]},
+    {label:"of the", items:["of the Ancient","of the Forgotten","of the Burning","of the Misty","of the Hidden","of the Dark","of the Golden","of the Eternal","of the Lost","of the Sundered","of the Hallowed","of the Forsaken","of the Undying","of the Shimmering","of the Iron","of the Broken","of the Fallen","of the Wandering","of the Frozen","of the Howling","of the Dying","of the Unspoken","of the Ancient Flame","of the Deep Shadow","of the Long Night","of the Grey Waste","of the Silent Storm","of the Crimson Dawn","of the Last Age","of the Soggy Blanket"]},
+    {label:"Place", items:["Caladrimm Moor","Vrothûn Peak","Grakhûn Wastes","Thornveld Crossing","Morgzeth Hollow","Sindavar Falls","Baldûrn Gate","Dorrakhûm Hold","Skarvûlmor Ridge","Eirvossen Vale","Khundavar Depths","Brûnakhold Pass","Dundamûr Ford","Thengavar Heights","Haelvorn Reach","Zûlvarak Gorge","Maevethor Glen","Orvindath Bluff","Caswelmoor Fen","Liravel Bridge","Aelthara Crest","Castrimos Watch","Grûmbolt Mine","Zorphindel Crossing","Valdûrn Keep","Aldûrion Gate","Morthrak Hollow","Gaelûrion Heights","Thrûmbak Depths","Eirvossen Ford"]}
   ]},
   "Western": { wheels: [
-    {label:"Adjective", items:["Dusty","Quick-draw","Ornery","Driftin'","Whiskey","Outlaw","Rattlesnake","Sunburned","Deadshot","Iron","Two-gun","Lonesome","Crooked","Wild","Mean"]},
-    {label:"Name", items:["Kid","Doc","Slim","Buck","Hank","Tex","Colt","Duke","Clyde","Virgil","Jesse","Billy","Wyatt","Clay","Butch"]},
-    {label:"of", items:["of Deadwood","of the Prairie","of Tombstone","of the Frontier","of Dodge City","of the Badlands","of the Mesa","of the Canyon","of Dry Gulch","of Boot Hill","of the Dusty Trail","of the Rio Grande","of the Lonesome Plains","of Devil's Ridge","of the Unmarked Grave"]}
+    {label:"Surname", items:["McGraw","Holloway","Pickett","Mercer","Dalton","Cassidy","Earp","Hardin","Garrett","Ringo","Quantrill","Younger","Clanton","Sundance","Bonney","Decker","Holt","Calhoun","Bridger","Mudd","Langley","Tanner","Stratton","Colby","Dunbar","Macready","Stillwater","Rawlins","Coldwell","Breckenridge"]},
+    {label:"the Adjective", items:["the Crooked","the Ornery","the Lonesome","the Wanted","the Grizzled","the Trigger-happy","the Mean","the Wild","the Dusty","the No-good","the Half-cocked","the Deadshot","the Iron","the Two-gun","the Ruthless","the Sunburned","the Hollow-eyed","the Foul-tempered","the Broke","the Unlucky","the Smelly","the Toothless","the Flatbroke","the Slow-witted","the Forgetful","the Gassy","the Unwashed","the Snoring","the Colicky","the Bewildered"]},
+    {label:"Nickname", items:["Rattlesnake","Drifter","Outlaw","Kid","Deadshot","Preacher","Doc","Stranger","Lawman","Gunslinger","Desperado","Bounty Hunter","Wanderer","Renegade","Maverick","Rustler","Vigilante","Squinter","Varmint","Tumbleweed","Sidewinder","Pistolero","Scalawag","Scoundrel","Rapscallion","Yellowbelly","Bushwhacker","Cattle Thief","Mud-roller","Shoelace-ignorer"]}
   ]}
 };
-
+ 
 const CHAOS_WHEELS = [
-  {label:"Word 1", items:["Lord","Ghost","The Dread","The Undefeated","The Flying","Bjorn","Aldûrion","Dusty","Sir","Cipher","The Mighty","The Iron","The Golden","Ragnar","Gothrimm","Quick-draw","Baron","Shadow","The Mad","The Burning","The Blazing","Leif","Vrothûn","Ornery","Earl","Specter","The Fearsome","The Stone","The Bullet","Gunnar","Thornvast","Outlaw","The Great","Phantom","The Cunning","The Thunder","The Relentless","Ivar","Edrunn","Iron"]},
-  {label:"Word 2", items:["Thunderous","Silent","One-Eyed","Blood-soaked","Turbo","Fearless","Ancient","Sunburned","Golden","Midnight","Barnacled","Scarred","Lightning","Ironside","Forgotten","Ornery","Fierce","Covert","Rum-soaked","Roaring","Thunder","Stormbringer","Hidden","Deadshot","Slumbering","Black","Scurvy","Crushing","Power","Bonecrusher","Burning","Iron","Wobbly","Deep","Iron-jawed","Howling","Rocket","Skullbreaker","Eternal","Two-gun"]},
-  {label:"Word 3", items:["Badger","Fox","Kraken","Fist","Machine","of Valhalla","Caladrimm","of Deadwood","Wyrm","Viper","Cutlass","Hammer","Express","of the Fjords","Grûmbolt","of Tombstone","Falcon","Wolf","Cannon","Lion","Rocket","of the Longship","Dorrakhûm","of the Badlands","Raven","Shark","Maelstrom","Titan","Freight Train","of Midgard","Thengavar Hold","Dry Gulch","Elk","Lynx","Galleon","Crusher","Dynamo","of the Storm","Vrothûn Peak","the Canyon"]},
-  {label:"Word 4", items:["of Eidsvoll","the Bold","of the North","the Unslept","of Fosen","the Loud","Ironbelly","Snowborn","the Hungry","of Legend","the Wobbly","of the Realm","Twice-Born","the Stubborn","of Jotunheimen","Unleashed","Unbreakable","Forever","Prime","Elite","Reborn","Ironside","Frostborn","the Fearless","of the North Sea","of Asgard","of the Mead Hall","of Valhalla","the Wanderer","Pathfinder"]}
+  {label:"Word 1", items:["Lord","Eagle Wind","The Iron","Bjorn","Caladwen","McGraw","Grimshaw","Blackbeard","Ghost","Ragnar","Sir","Cipher","Gothrimm","Aldric","Titan","Baron","Shadow","Leif","Skarvûl","Flint","The Great","Phantom","Ivar","Dagger","Coldvale","Earl","Specter","Gunnar","Vrothûn","Crowbone","Wobblefoot","Binky-thief","Pudding","Nappykins","Dribblesworth"]},
+  {label:"Word 2", items:["Thunderous","Silent","Ironside","Blood-soaked","Turbo","Fearless","Ancient","Stormbringer","Golden","Midnight","Barnacled","Scarred","Nap-keeper","Forgotten","Ornery","Fierce","Covert","Rum-soaked","Roaring","Thunder","Hidden","Deadshot","Slumbering","Black","Scurvy","Crushing","Power","Bonecrusher","Burning","Wobbly","Colicky","Runny-nosed","Drooly","Snack-powered","Soggy"]},
+  {label:"Word 3", items:["Badger","Kraken","Titan","Machine","of Valhalla","Wyrm","Viper","Cutlass","Hammer","Express","of the Fjords","Falcon","Wolf","Cannon","Lion","of the Longship","Raven","Shark","Maelstrom","Freight Train","of Midgard","Elk","Lynx","Galleon","Crusher","of the Storm","Puddle-stomper","Tantrum-thrower","Sock-remover","Burp-champion","Crayon-eater","Biscuit-hoarder","Mud-roller","Nap-taker","Pudding-face"]},
+  {label:"Word 4", items:["of Eidsvoll","the Bold","of the North","the Unslept","of Fosen","the Loud","Ironbelly","Snowborn","the Hungry","of Legend","the Wobbly","of the Realm","Twice-Born","the Stubborn","of Jotunheimen","the Colicky","the Sock-remover","Muddyboots","the Flatulent","the Adequate","of the Soggy Nappy","of the Snack Cupboard","the Bedtime-negotiator","the Crayon-eater","the Gassy","of the Mead Hall","of Asgard","Frostborn","the Fearless","Pathfinder"]}
 ];
-
+ 
 const ITEM_H=40;
 let mode='genre', activeGenre="Ren Faire", strips=[], currentIndices=[], spinning=false, currentWheels=[];
-
+ 
 function buildTabs() {
   const tabs=document.getElementById('genreTabs'); tabs.innerHTML='';
   Object.keys(GENRES).forEach(g=>{
@@ -366,7 +416,7 @@ function buildTabs() {
     tabs.appendChild(btn);
   });
 }
-
+ 
 function setMode(m) {
   mode=m;
   document.getElementById('modeByGenre').classList.toggle('active',m==='genre');
@@ -375,7 +425,7 @@ function setMode(m) {
   document.getElementById('chaosPanel').style.display=m==='chaos'?'block':'none';
   resetAll();
 }
-
+ 
 function buildWheels() {
   const row=document.getElementById('wheelsRow'); row.innerHTML='';
   strips=[]; currentIndices=[];
@@ -398,22 +448,68 @@ function buildWheels() {
     strips.push(strip);
   });
 }
-
+ 
 function spinOne(wi) {
   if(spinning) return;
   const b=document.getElementById('sb'+wi); if(b) b.disabled=true;
   document.getElementById('resultBox').style.display='none';
   spinWheel(wi,currentWheels[wi].items.length).then(()=>{ if(b) b.disabled=false; });
 }
-
+ 
+function spinWildcard() {
+  if(spinning) return; spinning=true;
+  document.getElementById('spinAllBtn').disabled=true;
+  document.getElementById('wildcardBtn').disabled=true;
+  document.getElementById('resultBox').style.display='none';
+  currentWheels.forEach((w,wi)=>{ const b=document.getElementById('sb'+wi); if(b) b.disabled=true; });
+ 
+  const pool = mode==='chaos' ? null : WILDCARDS[activeGenre];
+  const promises = currentWheels.map((w,wi)=>{
+    if(pool && pool[wi] && pool[wi].length) {
+      const forced = pool[wi][Math.floor(Math.random()*pool[wi].length)];
+      const forcedIdx = w.items.indexOf(forced);
+      if(forcedIdx>=0) {
+        return spinWheelToIndex(wi, w.items.length, forcedIdx);
+      }
+    }
+    return spinWheel(wi, w.items.length);
+  });
+ 
+  Promise.all(promises).then(()=>{ spinning=false; showResult(true); });
+}
+ 
+function spinWheelToIndex(wi, total, targetIdx) {
+  return new Promise(resolve=>{
+    const strip=strips[wi];
+    const si=currentIndices[wi];
+    const fullRotations=total*3;
+    const ei=si+fullRotations+(targetIdx - (si%total) + total)%total;
+    const dur=2000+wi*160+Math.random()*400;
+    const t0=performance.now();
+    function ease(t){ return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
+    function frame(now){
+      const p=Math.min((now-t0)/dur,1);
+      strip.style.transform=`translateY(${-((si+(ei-si)*ease(p))*ITEM_H-ITEM_H)}px)`;
+      if(p<1){ requestAnimationFrame(frame); }
+      else {
+        const fi=ei%total; currentIndices[wi]=fi===0?total:fi;
+        strip.style.transform=`translateY(${-(currentIndices[wi]*ITEM_H-ITEM_H)}px)`;
+        resolve();
+      }
+    }
+    requestAnimationFrame(frame);
+  });
+}
+ 
 function spinAll() {
   if(spinning) return; spinning=true;
   document.getElementById('spinAllBtn').disabled=true;
+  document.getElementById('wildcardBtn').disabled=true;
   document.getElementById('resultBox').style.display='none';
   currentWheels.forEach((w,wi)=>{ const b=document.getElementById('sb'+wi); if(b) b.disabled=true; });
-  Promise.all(currentWheels.map((w,wi)=>spinWheel(wi,w.items.length))).then(()=>{ spinning=false; showResult(); });
+  Promise.all(currentWheels.map((w,wi)=>spinWheel(wi,w.items.length))).then(()=>{ spinning=false; showResult(false); });
 }
-
+ 
 function spinWheel(wi,total) {
   return new Promise(resolve=>{
     const strip=strips[wi];
@@ -437,19 +533,22 @@ function spinWheel(wi,total) {
     requestAnimationFrame(frame);
   });
 }
-
-function showResult() {
+ 
+function showResult(isWildcard) {
   const parts=currentWheels.map((w,wi)=>{ const idx=(currentIndices[wi]%w.items.length+w.items.length)%w.items.length; return w.items[idx]; });
-  document.getElementById('resultGenre').textContent=mode==='chaos'?'All Realms Combined':activeGenre;
+  document.getElementById('resultGenre').textContent=isWildcard ? '🎲 Wildcard Prophecy' : mode==='chaos'?'All Realms Combined':activeGenre;
   document.getElementById('resultName').textContent=parts.join(' ');
   document.getElementById('resultBox').style.display='block';
   document.getElementById('spinAllBtn').disabled=false;
+  document.getElementById('wildcardBtn').disabled=false;
   currentWheels.forEach((w,wi)=>{ const b=document.getElementById('sb'+wi); if(b) b.disabled=false; });
-  sparkle();
+  sparkle(isWildcard);
 }
-
-function sparkle() {
-  const cols=['#f0cc72','#c8d8f0','#c4b0f8','#d4a843','#ffffff','#e8d0ff'];
+ 
+function sparkle(isWildcard) {
+  const cols = isWildcard
+    ? ['#ff88cc','#ffcc44','#88ffcc','#cc88ff','#ffffff','#ffaa88']
+    : ['#f0cc72','#c8d8f0','#c4b0f8','#d4a843','#ffffff','#e8d0ff'];
   for(let i=0;i<20;i++) {
     setTimeout(()=>{
       const el=document.createElement('div'); el.className='sparkle';
@@ -463,13 +562,14 @@ function sparkle() {
     },i*45);
   }
 }
-
+ 
 function resetAll() {
   document.getElementById('resultBox').style.display='none';
   document.getElementById('spinAllBtn').disabled=false;
+  document.getElementById('wildcardBtn').disabled=false;
   buildWheels();
 }
-
+ 
 buildTabs();
 buildWheels();
 </script>
