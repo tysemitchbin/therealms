@@ -4,880 +4,472 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>The Oracle of Names — The Prophecy Is Fulfilled</title>
-<link href="https://fonts.googleapis.com/css2?family=MedievalSharp&family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@400;700&family=IM+Fell+English:ital@0;1&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;900&family=Cinzel+Decorative:wght@400;700&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold: #c9943a;
-    --gold-light: #e8c472;
-    --gold-dark: #9a7228;
-    --parchment: #fdf6e3;
-    --parchment-dark: #ead898;
-    --parchment-darker: #c9a84c;
-    --ink: #2a1f0e;
-    --ink-light: #5a4020;
-    --crimson: #8b1a1a;
-    --crimson-light: #b52020;
-    --forest: #1a3d1a;
-    --shadow: rgba(0,0,0,0.3);
-    --border: #9a7228;
-  }
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --navy: #1a2240;
+  --navy-card: rgba(30,42,90,0.96);
+  --gold: #d4a843;
+  --gold-light: #f0cc72;
+  --gold-pale: #faefc0;
+  --gold-dim: #b08830;
+  --silver: #ddeeff;
+  --silver-dim: #8aaace;
+  --lavender: #d4c4ff;
+  --text-main: #eef4ff;
+  --text-muted: #9ab0d0;
+}
+body {
+  background: #1a2240;
+  min-height: 100vh;
+  font-family: 'Cormorant Garamond', serif;
+  color: var(--text-main);
+  overflow-x: hidden;
+}
+canvas#bg {
+  position: fixed; inset:0;
+  width:100%; height:100%;
+  z-index:0; pointer-events:none;
+}
+.page-wrap {
+  position:relative; z-index:1;
+  max-width:940px; margin:0 auto;
+  padding:52px 20px 90px;
+}
 
-  * { margin: 0; padding: 0; box-sizing: border-box; }
+/* HEADER */
+.header { text-align:center; margin-bottom:44px; animation: riseIn 1.3s cubic-bezier(.16,1,.3,1) both; }
+@keyframes riseIn { from{opacity:0;transform:translateY(20px)} to{opacity:1;transform:translateY(0)} }
 
-  body {
-    background-color: #3a2c10;
-    background-image:
-      repeating-linear-gradient(0deg, transparent, transparent 40px, rgba(201,148,58,0.03) 40px, rgba(201,148,58,0.03) 41px),
-      repeating-linear-gradient(90deg, transparent, transparent 40px, rgba(201,148,58,0.03) 40px, rgba(201,148,58,0.03) 41px);
-    min-height: 100vh;
-    font-family: 'IM Fell English', serif;
-    color: var(--ink);
-    overflow-x: hidden;
-  }
+.moon-glyph { display:block; margin:0 auto 22px; width:120px; height:120px; animation:floatMoon 7s ease-in-out infinite; }
+@keyframes floatMoon { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
 
-  .stars {
-    position: fixed;
-    top: 0; left: 0; right: 0; bottom: 0;
-    pointer-events: none;
-    z-index: 0;
-  }
+.eyebrow { font-family:'Cinzel',serif; font-size:10px; letter-spacing:0.28em; color:#b0ccee; text-transform:uppercase; margin-bottom:14px; }
+.main-title { font-family:'Cinzel Decorative',serif; font-size:clamp(24px,5.5vw,52px); font-weight:700; color:var(--gold-light); line-height:1.1; margin-bottom:10px; text-shadow:0 0 60px rgba(212,168,67,0.5),0 0 120px rgba(212,168,67,0.2); }
+.sub-title { font-family:'Cormorant Garamond',serif; font-style:italic; font-size:18px; font-weight:300; color:var(--silver); letter-spacing:0.04em; margin-bottom:24px; }
 
-  .star {
-    position: absolute;
-    width: 2px; height: 2px;
-    background: var(--gold-light);
-    border-radius: 50%;
-    animation: twinkle var(--dur, 3s) ease-in-out infinite;
-    animation-delay: var(--delay, 0s);
-    opacity: 0.4;
-  }
+.star-div { display:flex; align-items:center; justify-content:center; gap:10px; max-width:300px; margin:0 auto; }
+.star-div-line { flex:1; height:1px; background:linear-gradient(to right,transparent,var(--gold-dim)); }
+.star-div-line.r { background:linear-gradient(to left,transparent,var(--gold-dim)); }
+.star-div-dot { width:4px;height:4px;background:var(--gold);border-radius:50%;box-shadow:0 0 6px var(--gold); }
 
-  @keyframes twinkle {
-    0%, 100% { opacity: 0.1; }
-    50% { opacity: 0.7; }
-  }
+/* SCROLL */
+.prophecy-scroll {
+  background:rgba(38,54,110,0.97); border:1px solid rgba(212,168,67,0.35); border-radius:14px;
+  padding:28px 36px; margin-bottom:24px; text-align:center;
+  backdrop-filter:blur(14px);
+  box-shadow:0 0 60px rgba(80,100,200,0.15),inset 0 1px 0 rgba(255,255,255,0.08);
+  animation:riseIn 1.3s cubic-bezier(.16,1,.3,1) 0.1s both;
+}
+.moon-phases { display:flex; justify-content:center; gap:12px; margin-bottom:18px; opacity:0.5; }
+.phase { width:16px;height:16px;border-radius:50%;border:1px solid var(--gold-dim); }
+.phase-new { background:transparent; }
+.phase-wax { background:linear-gradient(to right,transparent 50%,rgba(122,94,24,0.8) 50%); }
+.phase-half { background:linear-gradient(to right,transparent 50%,var(--gold) 50%); }
+.phase-gib { background:linear-gradient(to right,rgba(122,94,24,0.4) 20%,var(--gold) 80%); }
+.phase-full { background:var(--gold);box-shadow:0 0 12px rgba(212,168,67,0.6); }
+.prophecy-scroll p { font-size:17px;line-height:1.9;color:#ddeeff;font-style:italic;font-weight:400; }
+.prophecy-scroll strong { font-style:normal;font-weight:700;color:var(--gold-light); }
 
-  .page-wrap {
-    position: relative;
-    z-index: 1;
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 40px 20px 80px;
-  }
+/* ORACLE PANEL */
+.oracle-panel {
+  background:rgba(38,54,110,0.97); border:1px solid rgba(212,168,67,0.25); border-radius:18px;
+  padding:36px 28px; backdrop-filter:blur(16px);
+  box-shadow:0 0 80px rgba(80,100,200,0.15),inset 0 1px 0 rgba(255,255,255,0.07);
+  animation:riseIn 1.3s cubic-bezier(.16,1,.3,1) 0.25s both;
+}
 
-  /* HEADER */
-  .header {
-    text-align: center;
-    margin-bottom: 40px;
-    animation: fadeDown 1s ease both;
-  }
+/* MODE TOGGLE */
+.mode-toggle { display:flex;width:fit-content;margin:0 auto 28px;border:1px solid rgba(212,168,67,0.35);border-radius:30px;overflow:hidden; }
+.mode-btn { padding:9px 28px;font-family:'Cinzel',serif;font-size:12px;letter-spacing:0.14em;cursor:pointer;border:none;background:transparent;color:#b0ccee;transition:all .25s; }
+.mode-btn.active { background:rgba(212,168,67,0.18);color:var(--gold-light); }
+.mode-btn:hover:not(.active) { color:#ddeeff; }
 
-  @keyframes fadeDown {
-    from { opacity: 0; transform: translateY(-20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
+/* GENRE TABS */
+.genre-tabs { display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-bottom:32px; }
+.genre-tab { padding:7px 18px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.1em;border:1px solid rgba(200,216,240,0.28);border-radius:20px;cursor:pointer;background:transparent;color:#b0ccee;transition:all .2s; }
+.genre-tab.active { background:rgba(196,176,248,0.2);color:#e0d4ff;border-color:rgba(196,176,248,0.55); }
+.genre-tab:hover:not(.active) { border-color:rgba(200,216,240,0.5);color:#ddeeff; }
 
-  .crown-row {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 16px;
-    margin-bottom: 12px;
-  }
+.chaos-note { text-align:center;font-style:italic;font-size:17px;color:#b0ccee;margin-bottom:28px;font-weight:400; }
 
-  .crown-line {
-    flex: 1;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold), transparent);
-  }
+/* WHEELS */
+.wheels-row { display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-bottom:32px; }
+.wheel-wrap { display:flex;flex-direction:column;align-items:center;gap:8px; }
+.wheel-label { font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.16em;color:var(--gold-light);text-transform:uppercase;font-weight:600; }
+.wheel-container { position:relative;width:136px;height:120px;overflow:hidden;border:1px solid rgba(212,168,67,0.45);border-radius:10px;background:rgba(22,34,72,0.99);box-shadow:0 0 24px rgba(80,100,200,0.15),inset 0 1px 0 rgba(255,255,255,0.06); }
+.wheel-strip { position:absolute;width:100%; }
+.wheel-item { height:40px;display:flex;align-items:center;justify-content:center;font-size:14px;font-family:'Cormorant Garamond',serif;font-weight:600;color:#eef4ff;border-bottom:1px solid rgba(255,255,255,0.07);text-align:center;padding:0 6px;line-height:1.2; }
+.wheel-selector { position:absolute;top:50%;left:0;right:0;height:40px;transform:translateY(-50%);border-top:1px solid rgba(212,168,67,0.45);border-bottom:1px solid rgba(212,168,67,0.45);background:rgba(212,168,67,0.05);pointer-events:none; }
+.wheel-fade-top { position:absolute;top:0;left:0;right:0;height:38px;background:linear-gradient(to bottom,rgba(22,34,72,0.99),transparent);pointer-events:none; }
+.wheel-fade-bot { position:absolute;bottom:0;left:0;right:0;height:38px;background:linear-gradient(to top,rgba(22,34,72,0.99),transparent);pointer-events:none; }
+.spin-single-btn { padding:6px 16px;font-family:'Cinzel',serif;font-size:10px;letter-spacing:0.12em;cursor:pointer;border:1px solid rgba(212,168,67,0.35);border-radius:20px;background:transparent;color:#b0ccee;transition:all .2s; }
+.spin-single-btn:hover { color:var(--gold-light);border-color:rgba(212,168,67,0.6); }
+.spin-single-btn:disabled { opacity:0.3;cursor:not-allowed; }
 
-  .crown-svg { width: 48px; height: 40px; }
+/* CONSULT BTN */
+.btn-row { display:flex;justify-content:center;margin-bottom:28px; }
+.consult-btn { position:relative;padding:16px 56px;font-family:'Cinzel Decorative',serif;font-size:14px;letter-spacing:0.1em;cursor:pointer;border:1px solid rgba(212,168,67,0.45);border-radius:40px;background:rgba(212,168,67,0.08);color:var(--gold-light);transition:all .3s;overflow:hidden; }
+.consult-btn:hover { border-color:var(--gold);color:var(--gold-pale);background:rgba(212,168,67,0.14);box-shadow:0 0 40px rgba(212,168,67,0.15); }
+.consult-btn:disabled { opacity:0.35;cursor:not-allowed; }
 
-  .header-eyebrow {
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 0.25em;
-    color: var(--gold);
-    text-transform: uppercase;
-    margin-bottom: 12px;
-  }
+/* RESULT */
+.result-box { display:none;border:1px solid rgba(212,168,67,0.4);border-radius:14px;padding:32px 28px;text-align:center;background:rgba(30,46,100,0.99);box-shadow:0 0 80px rgba(212,168,67,0.12),inset 0 1px 0 rgba(255,255,255,0.07);animation:resultIn .7s cubic-bezier(.16,1,.3,1) both; }
+@keyframes resultIn { from{opacity:0;transform:scale(.95) translateY(10px)} to{opacity:1;transform:scale(1) translateY(0)} }
+.result-stars { display:flex;justify-content:center;gap:8px;margin-bottom:14px; }
+.result-star { width:5px;height:5px;background:var(--gold);border-radius:50%;box-shadow:0 0 8px var(--gold);animation:pulseStar 2s ease-in-out infinite; }
+.result-star:nth-child(2){animation-delay:.25s} .result-star:nth-child(3){animation-delay:.5s} .result-star:nth-child(4){animation-delay:.75s} .result-star:nth-child(5){animation-delay:1s}
+@keyframes pulseStar { 0%,100%{opacity:.3;transform:scale(.7)} 50%{opacity:1;transform:scale(1.3)} }
+.result-eyebrow { font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.25em;color:#b0ccee;text-transform:uppercase;margin-bottom:8px; }
+.result-realm { display:inline-block;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.18em;color:#e0d4ff;border:1px solid rgba(196,176,248,0.4);border-radius:20px;padding:4px 16px;margin-bottom:18px; }
+.result-name { font-family:'Cinzel Decorative',serif;font-size:clamp(16px,3.5vw,30px);font-weight:700;color:var(--gold-light);line-height:1.3;margin-bottom:20px;text-shadow:0 0 40px rgba(212,168,67,0.6),0 0 80px rgba(212,168,67,0.2); }
+.reset-btn { font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.15em;color:#b0ccee;background:none;border:none;cursor:pointer;text-decoration:underline;text-underline-offset:4px;transition:color .2s; }
+.reset-btn:hover { color:#ddeeff; }
 
-  .header-title {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(22px, 5vw, 42px);
-    font-weight: 700;
-    color: var(--gold-light);
-    line-height: 1.15;
-    text-shadow: 0 0 40px rgba(201,148,58,0.4), 2px 2px 0 var(--gold-dark);
-    margin-bottom: 8px;
-  }
+/* FOOTER */
+.footer { text-align:center;margin-top:52px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:0.2em;color:rgba(180,210,255,0.7); }
 
-  .header-sub {
-    font-family: 'IM Fell English', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: var(--parchment-dark);
-    margin-bottom: 20px;
-  }
-
-  .divider {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    justify-content: center;
-    margin: 16px 0;
-  }
-
-  .divider-line {
-    flex: 1;
-    max-width: 120px;
-    height: 1px;
-    background: linear-gradient(to right, transparent, var(--gold-dark));
-  }
-
-  .divider-line.right {
-    background: linear-gradient(to left, transparent, var(--gold-dark));
-  }
-
-  .divider-diamond {
-    width: 8px; height: 8px;
-    background: var(--gold);
-    transform: rotate(45deg);
-  }
-
-  /* SCROLL / INSTRUCTION */
-  .scroll-box {
-    background: var(--parchment);
-    border: 2px solid var(--gold-dark);
-    border-radius: 4px;
-    padding: 20px 28px;
-    margin-bottom: 32px;
-    text-align: center;
-    position: relative;
-    box-shadow: 0 4px 32px rgba(0,0,0,0.3), inset 0 0 40px rgba(201,148,58,0.06);
-    animation: fadeUp 1s ease 0.3s both;
-  }
-
-  @keyframes fadeUp {
-    from { opacity: 0; transform: translateY(16px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-
-  .scroll-box::before, .scroll-box::after {
-    content: '❧';
-    position: absolute;
-    font-size: 20px;
-    color: var(--gold-dark);
-  }
-  .scroll-box::before { top: 10px; left: 16px; }
-  .scroll-box::after { bottom: 10px; right: 16px; transform: scaleX(-1); }
-
-  .scroll-box p {
-    font-size: 15px;
-    line-height: 1.7;
-    color: var(--ink-light);
-    font-style: italic;
-  }
-
-  .scroll-box strong {
-    color: var(--crimson);
-    font-style: normal;
-    font-weight: normal;
-  }
-
-  /* MAIN PANEL */
-  .oracle-panel {
-    background: var(--parchment);
-    border: 2px solid var(--gold-dark);
-    border-radius: 4px;
-    padding: 32px 28px;
-    box-shadow: 0 8px 48px rgba(0,0,0,0.6), inset 0 0 60px rgba(201,148,58,0.06);
-    animation: fadeUp 1s ease 0.5s both;
-  }
-
-  /* MODE TOGGLE */
-  .mode-toggle {
-    display: flex;
-    gap: 0;
-    border: 1.5px solid var(--gold-dark);
-    border-radius: 3px;
-    overflow: hidden;
-    margin-bottom: 24px;
-    width: fit-content;
-    margin-left: auto;
-    margin-right: auto;
-  }
-
-  .mode-btn {
-    padding: 9px 22px;
-    font-family: 'Cinzel', serif;
-    font-size: 11px;
-    letter-spacing: 0.12em;
-    cursor: pointer;
-    border: none;
-    background: transparent;
-    color: var(--ink-light);
-    transition: all 0.2s;
-  }
-
-  .mode-btn.active {
-    background: var(--gold-dark);
-    color: var(--parchment);
-  }
-
-  .mode-btn:hover:not(.active) {
-    background: rgba(122,90,26,0.15);
-  }
-
-  /* GENRE TABS */
-  .genre-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    justify-content: center;
-    margin-bottom: 28px;
-  }
-
-  .genre-tab {
-    padding: 6px 16px;
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    border: 1px solid var(--gold-dark);
-    border-radius: 2px;
-    cursor: pointer;
-    background: transparent;
-    color: var(--ink-light);
-    transition: all 0.2s;
-  }
-
-  .genre-tab.active {
-    background: var(--gold-dark);
-    color: var(--parchment);
-    border-color: var(--gold);
-  }
-
-  .genre-tab:hover:not(.active) {
-    background: rgba(122,90,26,0.15);
-    border-color: var(--gold);
-  }
-
-  /* CHAOS NOTE */
-  .chaos-note {
-    text-align: center;
-    font-style: italic;
-    color: var(--ink-light);
-    font-size: 14px;
-    margin-bottom: 24px;
-  }
-
-  /* WHEELS */
-  .wheels-row {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-bottom: 24px;
-  }
-
-  .wheel-wrap {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .wheel-label {
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 0.15em;
-    color: var(--gold-dark);
-    text-transform: uppercase;
-  }
-
-  .wheel-container {
-    position: relative;
-    width: 138px;
-    height: 120px;
-    overflow: hidden;
-    border: 1.5px solid var(--gold-dark);
-    border-radius: 3px;
-    background: #fefbf0;
-    box-shadow: inset 0 2px 8px rgba(0,0,0,0.08);
-  }
-
-  .wheel-strip {
-    position: absolute;
-    width: 100%;
-  }
-
-  .wheel-item {
-    height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 12px;
-    font-family: 'IM Fell English', serif;
-    color: var(--ink);
-    border-bottom: 0.5px solid rgba(122,90,26,0.2);
-    text-align: center;
-    padding: 0 6px;
-    line-height: 1.2;
-  }
-
-  .wheel-selector {
-    position: absolute;
-    top: 50%;
-    left: 0; right: 0;
-    height: 40px;
-    transform: translateY(-50%);
-    border-top: 1.5px solid var(--gold);
-    border-bottom: 1.5px solid var(--gold);
-    pointer-events: none;
-    background: rgba(201,148,58,0.07);
-  }
-
-  .wheel-fade-top {
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 36px;
-    background: linear-gradient(to bottom, #fefbf0, transparent);
-    pointer-events: none;
-  }
-
-  .wheel-fade-bot {
-    position: absolute;
-    bottom: 0; left: 0; right: 0;
-    height: 36px;
-    background: linear-gradient(to top, #fefbf0, transparent);
-    pointer-events: none;
-  }
-
-  /* SPIN INDIVIDUAL BTN */
-  .spin-single-btn {
-    margin-top: 6px;
-    padding: 5px 12px;
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 0.1em;
-    cursor: pointer;
-    border: 1px solid var(--gold-dark);
-    border-radius: 2px;
-    background: transparent;
-    color: var(--ink-light);
-    transition: all 0.2s;
-  }
-
-  .spin-single-btn:hover {
-    background: rgba(122,90,26,0.15);
-    border-color: var(--gold);
-  }
-
-  .spin-single-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  /* SPIN ALL BTN */
-  .btn-row {
-    display: flex;
-    justify-content: center;
-    margin-bottom: 20px;
-  }
-
-  .spin-all-btn {
-    padding: 13px 44px;
-    font-family: 'Cinzel Decorative', serif;
-    font-size: 13px;
-    letter-spacing: 0.08em;
-    cursor: pointer;
-    border: 2px solid var(--gold);
-    border-radius: 3px;
-    background: var(--gold-dark);
-    color: var(--parchment);
-    transition: all 0.2s;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .spin-all-btn:hover {
-    background: var(--gold);
-    color: var(--ink);
-  }
-
-  .spin-all-btn:disabled { opacity: 0.4; cursor: not-allowed; }
-
-  /* RESULT */
-  .result-box {
-    background: var(--ink);
-    border: 2px solid var(--gold);
-    border-radius: 4px;
-    padding: 24px 28px;
-    text-align: center;
-    display: none;
-    animation: revealResult 0.6s ease both;
-  }
-
-  @keyframes revealResult {
-    from { opacity: 0; transform: scale(0.97); }
-    to { opacity: 1; transform: scale(1); }
-  }
-
-  .result-eyebrow {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 0.2em;
-    color: var(--gold-dark);
-    text-transform: uppercase;
-    margin-bottom: 8px;
-  }
-
-  .result-name {
-    font-family: 'Cinzel Decorative', serif;
-    font-size: clamp(16px, 4vw, 28px);
-    font-weight: 700;
-    color: var(--gold-light);
-    line-height: 1.3;
-    text-shadow: 0 0 30px rgba(201,148,58,0.5);
-    margin-bottom: 16px;
-  }
-
-  .result-genre-badge {
-    display: inline-block;
-    padding: 3px 12px;
-    border: 1px solid var(--gold-dark);
-    border-radius: 2px;
-    font-family: 'Cinzel', serif;
-    font-size: 9px;
-    letter-spacing: 0.12em;
-    color: var(--gold-dark);
-    margin-bottom: 16px;
-  }
-
-  .reset-btn {
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--gold-dark);
-    background: none;
-    border: none;
-    cursor: pointer;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-  }
-
-  /* FOOTER */
-  .footer {
-    text-align: center;
-    margin-top: 48px;
-    font-family: 'Cinzel', serif;
-    font-size: 10px;
-    letter-spacing: 0.15em;
-    color: var(--gold-dark);
-    opacity: 0.6;
-  }
-
-  /* Particle burst */
-  .particle {
-    position: fixed;
-    pointer-events: none;
-    border-radius: 50%;
-    animation: burst 0.8s ease-out forwards;
-    z-index: 999;
-  }
-
-  @keyframes burst {
-    0% { opacity: 1; transform: translate(0,0) scale(1); }
-    100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0); }
-  }
+/* SPARKLES */
+.sparkle { position:fixed;border-radius:50%;pointer-events:none;animation:sparkleOut .9s ease-out forwards;z-index:999; }
+@keyframes sparkleOut { 0%{opacity:1;transform:translate(0,0) scale(1)} 100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(0)} }
 </style>
 </head>
 <body>
-
-<div class="stars" id="stars"></div>
-
+<canvas id="bg"></canvas>
 <div class="page-wrap">
 
   <!-- HEADER -->
   <div class="header">
-    <div class="header-eyebrow">The Royal Baby Shower · Anno Domini MMXXVI</div>
-    <div class="crown-row">
-      <div class="crown-line"></div>
-      <svg class="crown-svg" viewBox="0 0 48 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <polygon points="4,36 4,16 12,24 24,4 36,24 44,16 44,36" fill="none" stroke="#c9943a" stroke-width="2" stroke-linejoin="round"/>
-        <circle cx="4" cy="16" r="3" fill="#c9943a"/>
-        <circle cx="44" cy="16" r="3" fill="#c9943a"/>
-        <circle cx="24" cy="4" r="3" fill="#e8c472"/>
-        <rect x="4" y="34" width="40" height="3" rx="1" fill="#c9943a"/>
-      </svg>
-      <div class="crown-line"></div>
-    </div>
-    <div class="header-title">The Oracle of Names</div>
-    <div class="header-sub">Consults the Ancient Oracle · Seek Inspiration · Pin Thy Prophecy</div>
-    <div class="divider">
-      <div class="divider-line"></div>
-      <div class="divider-diamond"></div>
-      <div class="divider-line right"></div>
+    <svg class="moon-glyph" viewBox="0 0 120 120" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <radialGradient id="mg" cx="50%" cy="40%" r="55%">
+          <stop offset="0%" stop-color="#d4a843" stop-opacity="0.35"/>
+          <stop offset="100%" stop-color="#d4a843" stop-opacity="0"/>
+        </radialGradient>
+      </defs>
+      <circle cx="60" cy="52" r="46" fill="url(#mg)"/>
+      <!-- crescent -->
+      <path d="M60 18 C42 18 28 34 28 52 C28 70 42 86 60 86 C48 78 42 66 42 52 C42 38 48 26 60 18Z" fill="#c9943a" opacity="0.85"/>
+      <path d="M60 18 C74 22 84 36 84 52 C84 68 74 82 60 86 C48 78 42 66 42 52 C42 38 48 26 60 18Z" fill="#f0cc72" opacity="0.7"/>
+      <!-- crown -->
+      <g transform="translate(46,8)">
+        <polygon points="0,16 0,5 6,10 14,0 22,10 28,5 28,16" fill="#f0cc72" opacity="0.95"/>
+        <rect x="0" y="14" width="28" height="3.5" rx="1.5" fill="#d4a843"/>
+        <circle cx="0" cy="5" r="2.2" fill="#faefc0"/>
+        <circle cx="14" cy="0" r="2.8" fill="#faefc0"/>
+        <circle cx="28" cy="5" r="2.2" fill="#faefc0"/>
+      </g>
+      <!-- stars -->
+      <circle cx="22" cy="26" r="1.5" fill="#c8d8f0" opacity="0.75"/>
+      <circle cx="96" cy="34" r="1.2" fill="#c4b0f8" opacity="0.65"/>
+      <circle cx="90" cy="76" r="1.5" fill="#d4a843" opacity="0.7"/>
+      <circle cx="18" cy="78" r="1" fill="#c8d8f0" opacity="0.5"/>
+      <circle cx="102" cy="18" r="1.2" fill="#f0cc72" opacity="0.55"/>
+      <circle cx="30" cy="96" r="1" fill="#c4b0f8" opacity="0.45"/>
+      <!-- cradle -->
+      <line x1="60" y1="86" x2="60" y2="98" stroke="#d4a843" stroke-width="1.2" opacity="0.55"/>
+      <line x1="46" y1="94" x2="74" y2="94" stroke="#d4a843" stroke-width="1.5" opacity="0.75"/>
+      <path d="M46 94 Q60 108 74 94" stroke="#d4a843" stroke-width="1.5" fill="none" opacity="0.75"/>
+      <line x1="46" y1="94" x2="46" y2="103" stroke="#d4a843" stroke-width="1" opacity="0.6"/>
+      <line x1="74" y1="94" x2="74" y2="103" stroke="#d4a843" stroke-width="1" opacity="0.6"/>
+      <!-- sleeping face -->
+      <circle cx="60" cy="99" r="4" fill="#faefc0" opacity="0.65"/>
+      <path d="M57.5 100.5 Q60 103 62.5 100.5" stroke="#c9943a" stroke-width="0.8" fill="none" opacity="0.8"/>
+      <line x1="57" y1="98.5" x2="58.5" y2="98.5" stroke="#c9943a" stroke-width="0.7" opacity="0.6"/>
+      <line x1="61.5" y1="98.5" x2="63" y2="98.5" stroke="#c9943a" stroke-width="0.7" opacity="0.6"/>
+    </svg>
+
+    <div class="eyebrow">The Royal Baby Shower · Anno Domini MMXXVI</div>
+    <div class="main-title">The Oracle of Names</div>
+    <div class="sub-title">Consults the Ancient Oracle · Seek Inspiration · Pin Thy Prophecy</div>
+    <div class="star-div">
+      <div class="star-div-line"></div>
+      <div class="star-div-dot"></div>
+      <div class="star-div-dot" style="opacity:.45;width:3px;height:3px;"></div>
+      <div class="star-div-dot"></div>
+      <div class="star-div-line r"></div>
     </div>
   </div>
 
-  <!-- INSTRUCTION SCROLL -->
-  <div class="scroll-box">
-    <p>
-      Hear ye, all assembled guests of the realm. You are hereby called upon to submit a <strong>secret code name</strong> for the Royal Heir. Consult the Oracle for inspiration — spin the wheels as many times as you wish. Then write your finest suggestions upon a scroll and <strong>pin it to the Prophecy Board</strong>. Vote on the prophecy for the best names for the prince. At the hour of reckoning, <strong>Her Majesty and her concubine</strong> shall choose the name that shall follow this child through legend.
-    </p>
+  <!-- PROPHECY SCROLL -->
+  <div class="prophecy-scroll">
+    <div class="moon-phases">
+      <div class="phase phase-new"></div>
+      <div class="phase phase-wax"></div>
+      <div class="phase phase-half"></div>
+      <div class="phase phase-gib"></div>
+      <div class="phase phase-full"></div>
+      <div class="phase phase-gib" style="transform:scaleX(-1)"></div>
+      <div class="phase phase-half" style="transform:scaleX(-1)"></div>
+      <div class="phase phase-wax" style="transform:scaleX(-1)"></div>
+      <div class="phase phase-new"></div>
+    </div>
+    <p>Hear ye, all assembled guests of the realm. You are hereby called upon to submit a <strong>secret code name</strong> for the Royal Heir. Consult the Oracle for inspiration — spin the wheels as many times as you wish. Then write your finest suggestions upon a scroll and <strong>pin it to the Prophecy Board</strong>. Vote on the prophecy for the best names for the prince. At the hour of reckoning, <strong>Her Majesty and her concubine</strong> shall choose the name that shall follow this child through legend.</p>
   </div>
 
   <!-- ORACLE PANEL -->
   <div class="oracle-panel">
-
-    <!-- MODE TOGGLE -->
-    <div style="text-align:center; margin-bottom:6px;">
+    <div style="text-align:center;margin-bottom:6px;">
       <div class="mode-toggle">
         <button class="mode-btn active" id="modeByGenre" onclick="setMode('genre')">By Realm</button>
         <button class="mode-btn" id="modeChaos" onclick="setMode('chaos')">All Realms</button>
       </div>
     </div>
-
-    <!-- GENRE TABS -->
-    <div id="genrePanel">
-      <div class="genre-tabs" id="genreTabs"></div>
-    </div>
-
-    <!-- CHAOS NOTE -->
-    <div id="chaosPanel" style="display:none;">
-      <p class="chaos-note">The Oracle draws from every realm at once. Chaos reigns. The Prophecy Board awaits.</p>
-    </div>
-
-    <!-- WHEELS -->
+    <div id="genrePanel"><div class="genre-tabs" id="genreTabs"></div></div>
+    <div id="chaosPanel" style="display:none;"><p class="chaos-note">The stars draw from every realm at once. Chaos reigns. The Prophecy Board awaits.</p></div>
     <div class="wheels-row" id="wheelsRow"></div>
-
-    <!-- SPIN ALL -->
     <div class="btn-row">
-      <button class="spin-all-btn" id="spinAllBtn" onclick="spinAll()">✦ Consult the Oracle ✦</button>
+      <button class="consult-btn" id="spinAllBtn" onclick="spinAll()">✦ Consult the Oracle ✦</button>
     </div>
-
-    <!-- RESULT -->
     <div class="result-box" id="resultBox">
-      <div class="result-eyebrow">The Oracle hath spoken</div>
-      <div class="result-genre-badge" id="resultGenre"></div>
+      <div class="result-stars">
+        <div class="result-star"></div><div class="result-star"></div><div class="result-star"></div>
+        <div class="result-star"></div><div class="result-star"></div>
+      </div>
+      <div class="result-eyebrow">The stars have spoken</div>
+      <div class="result-realm" id="resultGenre"></div>
       <div class="result-name" id="resultName"></div>
       <button class="reset-btn" onclick="resetAll()">Spin the wheels again</button>
     </div>
-
   </div>
 
-  <div class="footer">
-    The Prophecy Is Fulfilled &nbsp;·&nbsp; Eidsvoll, Norway &nbsp;·&nbsp; MMXXVI
-  </div>
-
+  <div class="footer">The Prophecy Is Fulfilled &nbsp;·&nbsp; Eidsvoll, Norway &nbsp;·&nbsp; MMXXVI</div>
 </div>
 
 <script>
-const GENRES = {
-  "Ren Faire": {
-    wheels: [
-      { label: "Title", items: ["Lord","Sir","Baron","Duke","Count","The Great","Prince","Earl","Viscount","Marquess","Squire","Knight","His Grace","The Bold","His Lordship"] },
-      { label: "Adjective", items: ["Thunderous","Golden","Ancient","Fierce","Slumbering","Mighty","Wobbly","Radiant","Grumpy","Valiant","Fearsome","Boisterous","Wandering","Peculiar","Steadfast"] },
-      { label: "Creature", items: ["Badger","Wyrm","Falcon","Hedgehog","Cabbage","Raven","Marmot","Elk","Boar","Newt","Weasel","Toad","Lynx","Stoat","Cormorant"] },
-      { label: "Epithet", items: ["of Eidsvoll","the Bold","of the North","the Unslept","of Fosen","the Loud","Ironbelly","Snowborn","the Hungry","of Legend","the Wobbly","of the Realm","Twice-Born","the Stubborn","of Jotunheimen"] }
-    ]
-  },
-  "Spy": {
-    wheels: [
-      { label: "Codename", items: ["Ghost","Cipher","Phantom","Shadow","Specter","Vortex","Eclipse","Mirage","Wraith","Vector","Nexus","Zenith","Tempest","Obsidian","Cobalt"] },
-      { label: "Adjective", items: ["Silent","Midnight","Covert","Double","Black","Deep","Burning","Crimson","Iron","Frozen","Phantom","Hidden","Rogue","Sleeper","Dark"] },
-      { label: "Animal", items: ["Fox","Viper","Falcon","Mamba","Cobra","Wolf","Lynx","Condor","Raven","Shark","Mantis","Mongoose","Jaguar","Asp","Osprey"] }
-    ]
-  },
-  "Pirate": {
-    wheels: [
-      { label: "The", items: ["Dread","Terrible","Mighty","Infamous","Fearsome","Wild","Cunning","Bold","Iron","Mad","Cursed","Black","Scarlet","Salty","Merciless"] },
-      { label: "Adjective", items: ["One-Eyed","Barnacled","Shipwrecked","Rum-soaked","Fearless","Iron-jawed","Tattooed","Weathered","Scurvy","Storm-born","Bearded","Toothless","Sunburned","Wily","Scoundrel"] },
-      { label: "Noun", items: ["Kraken","Cutlass","Doubloon","Broadsword","Cannon","Maelstrom","Galleon","Plunderer","Marauder","Swashbuckler","Brigand","Corsair","Buccaneer","Freebooter","Rapscallion"] }
-    ]
-  },
-  "Gladiator": {
-    wheels: [
-      { label: "The", items: ["Undefeated","Iron","Burning","Stone","Savage","Thunder","Golden","Steel","Crimson","Eternal","Undying","Ferocious","Mighty","Ancient","Relentless"] },
-      { label: "Adjective", items: ["Blood-soaked","Scarred","Fearless","Roaring","Thundering","Crushing","Raging","Towering","Merciless","Unbroken","Howling","Blazing","Unstoppable","Iron-fisted","Battle-worn"] },
-      { label: "Noun", items: ["Fist","Hammer","Lion","Bull","Titan","Wolf","Crusher","Blade","Shield","Colossus","Destroyer","Conqueror","Champion","Juggernaut","Warlord"] }
-    ]
-  },
-  "Athlete": {
-    wheels: [
-      { label: "The", items: ["Flying","Iron","Bullet","Electric","Golden","Blazing","Unstoppable","Legendary","Mighty","Raging","Swift","Fearless","Invincible","Thundering","Relentless"] },
-      { label: "Adjective", items: ["Turbo","Hyper","Super","Ultra","Mega","Thunder","Lightning","Power","Nitro","Rocket","Warp","Blaze","Storm","Cannon","Flash"] },
-      { label: "Noun", items: ["Machine","Express","Hammer","Rocket","Missile","Freight Train","Dynamo","Torpedo","Juggernaut","Cannonball","Titan","Cyclone","Thunderbolt","Avalanche","Colossus"] }
-    ]
-  },
-  "Viking": {
-    wheels: [
-      { label: "Given Name", items: ["Bjorn","Ulf","Ragnar","Leif","Gunnar","Ivar","Thorvald","Halvard","Erik","Sigurd","Olaf","Harald","Rollo","Knut","Torsten"] },
-      { label: "the", items: ["Fearless","Ironside","Stormbringer","Axe-hand","Seafarer","Skullbreaker","Farwalker","Bonecrusher","Frostborn","Thunderous","Wanderer","Unyielding","Firebrand","Pathfinder","Bloodaxe"] },
-      { label: "of", items: ["of Valhalla","of the Fjords","of the Longship","of Midgard","of the Storm","of the Saga","of the North Sea","of the Raid","of Asgard","of the Mead Hall","of the Frozen Deep","of the Iron Shore","of the Grey Mountains","of the Ancient Ways","of Jotunheimen"] }
-    ]
-  },
-  "Lord of the Rings": {
-    wheels: [
-      { label: "Name", items: ["Aldûrion","Gothrimm","Brûnakhor","Thengavar","Eirvoss","Maldûren","Dundavar","Orvindel","Dorrakh","Khumbrul","Grûndavar","Baldûrn","Skarvûl","Morgzeth","Grakhûn","Zûlvarak","Aldric","Thornvast","Edrunn","Casweld","Borromar","Haelvorn","Zorphiel","Vrothûn","Castriel"] },
-      { label: "Title", items: ["Shadowlord","Ranger","Ringbearer","Keeper","Wanderer","Guardian","Warden","Steward","Loremaster","Pathfinder","Oathkeeper","Stonebearer","Lightbringer","Thornguard","Ironwarden"] },
-      { label: "of the", items: ["of the Ancient","of the Forgotten","of the Burning","of the Misty","of the Hidden","of the Dark","of the Golden","of the Eternal","of the Lost","of the Sundered","of the Hallowed","of the Forsaken","of the Undying","of the Shimmering","of the Iron"] },
-      { label: "Place", items: ["Caladrimm","Sylvenmoor","Orvindath","Khundavar","Grûmbolt","Dorrakhûm","Baldûrn Deep","Thengavar Hold","Vrothûn Peak","Dundamûr","Brûnakhold","Skarvûlmor","Grakhûn Wastes","Thornveld","Haelvorn","Morgzeth Pits","Zûlvarak","Caswelmoor","Eirvossen","Maevethor","Liravel","Aelthara","Castrimos","Zorphindel","Orvindath"] }
-    ]
-  },
-  "Western": {
-    wheels: [
-      { label: "Adjective", items: ["Dusty","Quick-draw","Ornery","Driftin'","Whiskey","Outlaw","Rattlesnake","Sunburned","Deadshot","Iron","Two-gun","Lonesome","Crooked","Wild","Mean"] },
-      { label: "Name", items: ["Kid","Doc","Slim","Buck","Hank","Tex","Colt","Duke","Clyde","Virgil","Jesse","Billy","Wyatt","Clay","Butch"] },
-      { label: "of", items: ["of Deadwood","of the Prairie","of Tombstone","of the Frontier","of Dodge City","of the Badlands","of the Mesa","of the Canyon","of Dry Gulch","of Boot Hill","of the Dusty Trail","of the Rio Grande","of the Lonesome Plains","of Devil's Ridge","of the Unmarked Grave"] }
-    ]
+/* CANVAS STARFIELD */
+const canvas = document.getElementById('bg');
+const ctx = canvas.getContext('2d');
+let W, H, stars = [], consts = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  initStars();
+}
+
+function initStars() {
+  stars = [];
+  for (let i = 0; i < 260; i++) {
+    stars.push({
+      x: Math.random()*W, y: Math.random()*H,
+      r: Math.random()<0.12 ? 1.6+Math.random()*0.8 : 0.4+Math.random()*0.9,
+      speed: 0.003+Math.random()*0.007,
+      phase: Math.random()*Math.PI*2,
+      color: Math.random()<0.18 ? '#d4a843' : Math.random()<0.25 ? '#c4b0f8' : '#c8d8f0'
+    });
   }
-};
-
-const CHAOS_WHEELS = [
-  {
-    label: "Word 1",
-    items: [
-      "Lord","Ghost","The Dread","The Undefeated","The Flying","Bjorn","Aldûrion","Dusty",
-      "Sir","Cipher","The Mighty","The Iron","The Golden","Ragnar","Gothrimm","Quick-draw",
-      "Baron","Shadow","The Mad","The Burning","The Blazing","Leif","Vrothûn","Ornery",
-      "Earl","Specter","The Fearsome","The Stone","The Bullet","Gunnar","Thornvast","Outlaw",
-      "The Great","Phantom","The Cunning","The Thunder","The Relentless","Ivar","Edrunn","Iron"
-    ]
-  },
-  {
-    label: "Word 2",
-    items: [
-      "Thunderous","Silent","One-Eyed","Blood-soaked","Turbo","Fearless","Ancient","Sunburned",
-      "Golden","Midnight","Barnacled","Scarred","Lightning","Ironside","Forgotten","Ornery",
-      "Fierce","Covert","Rum-soaked","Roaring","Thunder","Stormbringer","Hidden","Deadshot",
-      "Slumbering","Black","Scurvy","Crushing","Power","Bonecrusher","Burning","Iron",
-      "Wobbly","Deep","Iron-jawed","Howling","Rocket","Skullbreaker","Eternal","Two-gun"
-    ]
-  },
-  {
-    label: "Word 3",
-    items: [
-      "Badger","Fox","Kraken","Fist","Machine","Valhalla","Caladrimm","Deadwood",
-      "Wyrm","Viper","Cutlass","Hammer","Express","the Fjords","Grûmbolt","Tombstone",
-      "Falcon","Wolf","Cannon","Lion","Rocket","the Longship","Dorrakhûm","the Badlands",
-      "Raven","Shark","Maelstrom","Titan","Freight Train","Midgard","Thengavar Hold","Dry Gulch",
-      "Elk","Lynx","Galleon","Crusher","Dynamo","the Storm","Vrothûn Peak","the Canyon"
-    ]
-  },
-  {
-    label: "Word 4",
-    items: [
-      "of Eidsvoll","the Bold","of the North","the Unslept","of Fosen","the Loud","Ironbelly","Snowborn",
-      "the Hungry","of Legend","the Wobbly","of the Realm","Twice-Born","the Stubborn","of Jotunheimen",
-      "Unleashed","Unbreakable","Forever","Prime","Elite","Reborn","Ironside","Frostborn",
-      "the Fearless","of the North Sea","of Asgard","of the Mead Hall","of Valhalla","the Wanderer","Pathfinder"
-    ]
-  }
-];
-
-const ITEM_H = 40;
-let mode = 'genre';
-let activeGenre = "Ren Faire";
-let strips = [];
-let currentIndices = [];
-let spinning = false;
-let currentWheels = [];
-
-function buildStars() {
-  const container = document.getElementById('stars');
-  for (let i = 0; i < 80; i++) {
-    const star = document.createElement('div');
-    star.className = 'star';
-    star.style.left = Math.random() * 100 + '%';
-    star.style.top = Math.random() * 100 + '%';
-    star.style.setProperty('--dur', (2 + Math.random() * 4) + 's');
-    star.style.setProperty('--delay', (Math.random() * 4) + 's');
-    container.appendChild(star);
+  consts = [];
+  for (let c=0; c<6; c++) {
+    const cx=100+Math.random()*(W-200), cy=60+Math.random()*(H*0.55);
+    const pts=[];
+    for (let i=0;i<3+Math.floor(Math.random()*4);i++) pts.push({x:cx+(Math.random()-.5)*180,y:cy+(Math.random()-.5)*130});
+    consts.push(pts);
   }
 }
 
+function drawBg(t) {
+  ctx.clearRect(0,0,W,H);
+  ctx.fillStyle='#1a2240'; ctx.fillRect(0,0,W,H);
+  const g=ctx.createRadialGradient(W*.5,H*.28,0,W*.5,H*.28,H*.75);
+  g.addColorStop(0,'rgba(60,80,180,0.45)'); g.addColorStop(.6,'rgba(30,45,120,0.25)'); g.addColorStop(1,'transparent');
+  ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+  const g2=ctx.createRadialGradient(W*.15,H*.8,0,W*.15,H*.8,H*.4);
+  g2.addColorStop(0,'rgba(120,60,180,0.18)'); g2.addColorStop(1,'transparent');
+  ctx.fillStyle=g2; ctx.fillRect(0,0,W,H);
+  const g3=ctx.createRadialGradient(W*.85,H*.15,0,W*.85,H*.15,H*.35);
+  g3.addColorStop(0,'rgba(60,100,200,0.2)'); g3.addColorStop(1,'transparent');
+  ctx.fillStyle=g3; ctx.fillRect(0,0,W,H);
+  consts.forEach(pts=>{
+    ctx.beginPath(); ctx.moveTo(pts[0].x,pts[0].y);
+    for(let i=1;i<pts.length;i++) ctx.lineTo(pts[i].x,pts[i].y);
+    ctx.strokeStyle='rgba(196,176,248,0.15)'; ctx.lineWidth=0.8; ctx.stroke();
+    pts.forEach(p=>{ ctx.beginPath(); ctx.arc(p.x,p.y,1.2,0,Math.PI*2); ctx.fillStyle='rgba(220,210,255,0.5)'; ctx.fill(); });
+  });
+  stars.forEach(s=>{
+    const a=0.2+0.75*(0.5+0.5*Math.sin(t*s.speed+s.phase));
+    ctx.globalAlpha=a;
+    ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,Math.PI*2); ctx.fillStyle=s.color; ctx.fill();
+    if(s.r>1.3){ ctx.globalAlpha=a*.3; ctx.beginPath(); ctx.arc(s.x,s.y,s.r*3,0,Math.PI*2); ctx.fill(); }
+  });
+  ctx.globalAlpha=1;
+}
+
+window.addEventListener('resize',resize);
+resize();
+(function loop(t){ drawBg(t*.001); requestAnimationFrame(loop); })(0);
+
+/* WHEEL DATA */
+const GENRES = {
+  "Ren Faire": { wheels: [
+    {label:"Title", items:["Lord","Sir","Baron","Duke","Count","The Great","Prince","Earl","Viscount","Marquess","Squire","Knight","His Grace","The Bold","His Lordship"]},
+    {label:"Adjective", items:["Thunderous","Golden","Ancient","Fierce","Slumbering","Mighty","Wobbly","Radiant","Grumpy","Valiant","Fearsome","Boisterous","Wandering","Peculiar","Steadfast"]},
+    {label:"Creature", items:["Badger","Wyrm","Falcon","Hedgehog","Cabbage","Raven","Marmot","Elk","Boar","Newt","Weasel","Toad","Lynx","Stoat","Cormorant"]},
+    {label:"Epithet", items:["of Eidsvoll","the Bold","of the North","the Unslept","of Fosen","the Loud","Ironbelly","Snowborn","the Hungry","of Legend","the Wobbly","of the Realm","Twice-Born","the Stubborn","of Jotunheimen"]}
+  ]},
+  "Spy": { wheels: [
+    {label:"Codename", items:["Ghost","Cipher","Phantom","Shadow","Specter","Vortex","Eclipse","Mirage","Wraith","Vector","Nexus","Zenith","Tempest","Obsidian","Cobalt"]},
+    {label:"Adjective", items:["Silent","Midnight","Covert","Double","Black","Deep","Burning","Crimson","Iron","Frozen","Phantom","Hidden","Rogue","Sleeper","Dark"]},
+    {label:"Animal", items:["Fox","Viper","Falcon","Mamba","Cobra","Wolf","Lynx","Condor","Raven","Shark","Mantis","Mongoose","Jaguar","Asp","Osprey"]}
+  ]},
+  "Pirate": { wheels: [
+    {label:"The", items:["Dread","Terrible","Mighty","Infamous","Fearsome","Wild","Cunning","Bold","Iron","Mad","Cursed","Black","Scarlet","Salty","Merciless"]},
+    {label:"Adjective", items:["One-Eyed","Barnacled","Shipwrecked","Rum-soaked","Fearless","Iron-jawed","Tattooed","Weathered","Scurvy","Storm-born","Bearded","Toothless","Sunburned","Wily","Scoundrel"]},
+    {label:"Noun", items:["Kraken","Cutlass","Doubloon","Broadsword","Cannon","Maelstrom","Galleon","Plunderer","Marauder","Swashbuckler","Brigand","Corsair","Buccaneer","Freebooter","Rapscallion"]}
+  ]},
+  "Gladiator": { wheels: [
+    {label:"The", items:["Undefeated","Iron","Burning","Stone","Savage","Thunder","Golden","Steel","Crimson","Eternal","Undying","Ferocious","Mighty","Ancient","Relentless"]},
+    {label:"Adjective", items:["Blood-soaked","Scarred","Fearless","Roaring","Thundering","Crushing","Raging","Towering","Merciless","Unbroken","Howling","Blazing","Unstoppable","Iron-fisted","Battle-worn"]},
+    {label:"Noun", items:["Fist","Hammer","Lion","Bull","Titan","Wolf","Crusher","Blade","Shield","Colossus","Destroyer","Conqueror","Champion","Juggernaut","Warlord"]}
+  ]},
+  "Athlete": { wheels: [
+    {label:"The", items:["Flying","Iron","Bullet","Electric","Golden","Blazing","Unstoppable","Legendary","Mighty","Raging","Swift","Fearless","Invincible","Thundering","Relentless"]},
+    {label:"Adjective", items:["Turbo","Hyper","Super","Ultra","Mega","Thunder","Lightning","Power","Nitro","Rocket","Warp","Blaze","Storm","Cannon","Flash"]},
+    {label:"Noun", items:["Machine","Express","Hammer","Rocket","Missile","Freight Train","Dynamo","Torpedo","Juggernaut","Cannonball","Titan","Cyclone","Thunderbolt","Avalanche","Colossus"]}
+  ]},
+  "Viking": { wheels: [
+    {label:"Given Name", items:["Bjorn","Ulf","Ragnar","Leif","Gunnar","Ivar","Thorvald","Halvard","Erik","Sigurd","Olaf","Harald","Rollo","Knut","Torsten"]},
+    {label:"the", items:["Fearless","Ironside","Stormbringer","Axe-hand","Seafarer","Skullbreaker","Farwalker","Bonecrusher","Frostborn","Thunderous","Wanderer","Unyielding","Firebrand","Pathfinder","Bloodaxe"]},
+    {label:"of", items:["of Valhalla","of the Fjords","of the Longship","of Midgard","of the Storm","of the Saga","of the North Sea","of the Raid","of Asgard","of the Mead Hall","of the Frozen Deep","of the Iron Shore","of the Grey Mountains","of the Ancient Ways","of Jotunheimen"]}
+  ]},
+  "Lord of the Rings": { wheels: [
+    {label:"Name", items:["Aldûrion","Gothrimm","Brûnakhor","Thengavar","Eirvoss","Maldûren","Dundavar","Orvindel","Dorrakh","Khumbrul","Grûndavar","Baldûrn","Skarvûl","Morgzeth","Grakhûn","Zûlvarak","Aldric","Thornvast","Edrunn","Casweld","Borromar","Haelvorn","Zorphiel","Vrothûn","Castriel"]},
+    {label:"Title", items:["Shadowlord","Ranger","Ringbearer","Keeper","Wanderer","Guardian","Warden","Steward","Loremaster","Pathfinder","Oathkeeper","Stonebearer","Lightbringer","Thornguard","Ironwarden"]},
+    {label:"of the", items:["of the Ancient","of the Forgotten","of the Burning","of the Misty","of the Hidden","of the Dark","of the Golden","of the Eternal","of the Lost","of the Sundered","of the Hallowed","of the Forsaken","of the Undying","of the Shimmering","of the Iron"]},
+    {label:"Place", items:["Caladrimm","Sylvenmoor","Orvindath","Khundavar","Grûmbolt","Dorrakhûm","Baldûrn Deep","Thengavar Hold","Vrothûn Peak","Dundamûr","Brûnakhold","Skarvûlmor","Grakhûn Wastes","Thornveld","Haelvorn","Morgzeth Pits","Zûlvarak","Caswelmoor","Eirvossen","Maevethor","Liravel","Aelthara","Castrimos","Zorphindel","Orvindath"]}
+  ]},
+  "Western": { wheels: [
+    {label:"Adjective", items:["Dusty","Quick-draw","Ornery","Driftin'","Whiskey","Outlaw","Rattlesnake","Sunburned","Deadshot","Iron","Two-gun","Lonesome","Crooked","Wild","Mean"]},
+    {label:"Name", items:["Kid","Doc","Slim","Buck","Hank","Tex","Colt","Duke","Clyde","Virgil","Jesse","Billy","Wyatt","Clay","Butch"]},
+    {label:"of", items:["of Deadwood","of the Prairie","of Tombstone","of the Frontier","of Dodge City","of the Badlands","of the Mesa","of the Canyon","of Dry Gulch","of Boot Hill","of the Dusty Trail","of the Rio Grande","of the Lonesome Plains","of Devil's Ridge","of the Unmarked Grave"]}
+  ]}
+};
+
+const CHAOS_WHEELS = [
+  {label:"Word 1", items:["Lord","Ghost","The Dread","The Undefeated","The Flying","Bjorn","Aldûrion","Dusty","Sir","Cipher","The Mighty","The Iron","The Golden","Ragnar","Gothrimm","Quick-draw","Baron","Shadow","The Mad","The Burning","The Blazing","Leif","Vrothûn","Ornery","Earl","Specter","The Fearsome","The Stone","The Bullet","Gunnar","Thornvast","Outlaw","The Great","Phantom","The Cunning","The Thunder","The Relentless","Ivar","Edrunn","Iron"]},
+  {label:"Word 2", items:["Thunderous","Silent","One-Eyed","Blood-soaked","Turbo","Fearless","Ancient","Sunburned","Golden","Midnight","Barnacled","Scarred","Lightning","Ironside","Forgotten","Ornery","Fierce","Covert","Rum-soaked","Roaring","Thunder","Stormbringer","Hidden","Deadshot","Slumbering","Black","Scurvy","Crushing","Power","Bonecrusher","Burning","Iron","Wobbly","Deep","Iron-jawed","Howling","Rocket","Skullbreaker","Eternal","Two-gun"]},
+  {label:"Word 3", items:["Badger","Fox","Kraken","Fist","Machine","of Valhalla","Caladrimm","of Deadwood","Wyrm","Viper","Cutlass","Hammer","Express","of the Fjords","Grûmbolt","of Tombstone","Falcon","Wolf","Cannon","Lion","Rocket","of the Longship","Dorrakhûm","of the Badlands","Raven","Shark","Maelstrom","Titan","Freight Train","of Midgard","Thengavar Hold","Dry Gulch","Elk","Lynx","Galleon","Crusher","Dynamo","of the Storm","Vrothûn Peak","the Canyon"]},
+  {label:"Word 4", items:["of Eidsvoll","the Bold","of the North","the Unslept","of Fosen","the Loud","Ironbelly","Snowborn","the Hungry","of Legend","the Wobbly","of the Realm","Twice-Born","the Stubborn","of Jotunheimen","Unleashed","Unbreakable","Forever","Prime","Elite","Reborn","Ironside","Frostborn","the Fearless","of the North Sea","of Asgard","of the Mead Hall","of Valhalla","the Wanderer","Pathfinder"]}
+];
+
+const ITEM_H=40;
+let mode='genre', activeGenre="Ren Faire", strips=[], currentIndices=[], spinning=false, currentWheels=[];
+
 function buildTabs() {
-  const tabs = document.getElementById('genreTabs');
-  tabs.innerHTML = '';
-  Object.keys(GENRES).forEach(g => {
-    const btn = document.createElement('button');
-    btn.className = 'genre-tab' + (g === activeGenre ? ' active' : '');
-    btn.textContent = g;
-    btn.onclick = () => {
-      activeGenre = g;
-      document.querySelectorAll('.genre-tab').forEach(t => t.classList.toggle('active', t.textContent === g));
-      resetAll();
-    };
+  const tabs=document.getElementById('genreTabs'); tabs.innerHTML='';
+  Object.keys(GENRES).forEach(g=>{
+    const btn=document.createElement('button');
+    btn.className='genre-tab'+(g===activeGenre?' active':'');
+    btn.textContent=g;
+    btn.onclick=()=>{ activeGenre=g; document.querySelectorAll('.genre-tab').forEach(t=>t.classList.toggle('active',t.textContent===g)); resetAll(); };
     tabs.appendChild(btn);
   });
 }
 
 function setMode(m) {
-  mode = m;
-  document.getElementById('modeByGenre').classList.toggle('active', m === 'genre');
-  document.getElementById('modeChaos').classList.toggle('active', m === 'chaos');
-  document.getElementById('genrePanel').style.display = m === 'genre' ? 'block' : 'none';
-  document.getElementById('chaosPanel').style.display = m === 'chaos' ? 'block' : 'none';
+  mode=m;
+  document.getElementById('modeByGenre').classList.toggle('active',m==='genre');
+  document.getElementById('modeChaos').classList.toggle('active',m==='chaos');
+  document.getElementById('genrePanel').style.display=m==='genre'?'block':'none';
+  document.getElementById('chaosPanel').style.display=m==='chaos'?'block':'none';
   resetAll();
 }
 
 function buildWheels() {
-  const row = document.getElementById('wheelsRow');
-  row.innerHTML = '';
-  strips = [];
-  currentIndices = [];
-  currentWheels = mode === 'chaos' ? CHAOS_WHEELS : GENRES[activeGenre].wheels;
-
-  currentWheels.forEach((w, wi) => {
-    const wrap = document.createElement('div');
-    wrap.className = 'wheel-wrap';
-
-    const label = document.createElement('div');
-    label.className = 'wheel-label';
-    label.textContent = w.label;
-
-    const container = document.createElement('div');
-    container.className = 'wheel-container';
-
-    const strip = document.createElement('div');
-    strip.className = 'wheel-strip';
-
-    const items = [...w.items, ...w.items, ...w.items];
-    items.forEach(item => {
-      const el = document.createElement('div');
-      el.className = 'wheel-item';
-      el.textContent = item;
-      strip.appendChild(el);
-    });
-
-    const fadeTop = document.createElement('div'); fadeTop.className = 'wheel-fade-top';
-    const fadeBot = document.createElement('div'); fadeBot.className = 'wheel-fade-bot';
-    const selector = document.createElement('div'); selector.className = 'wheel-selector';
-
-    container.appendChild(strip);
-    container.appendChild(selector);
-    container.appendChild(fadeTop);
-    container.appendChild(fadeBot);
-
-    const singleBtn = document.createElement('button');
-    singleBtn.className = 'spin-single-btn';
-    singleBtn.textContent = '⟳ Spin';
-    singleBtn.id = 'singleBtn' + wi;
-    singleBtn.onclick = () => spinOne(wi);
-
-    wrap.appendChild(label);
-    wrap.appendChild(container);
-    wrap.appendChild(singleBtn);
-    row.appendChild(wrap);
-
-    const startIdx = w.items.length + Math.floor(Math.random() * w.items.length);
-    currentIndices[wi] = startIdx;
-    strip.style.transform = `translateY(${-(startIdx * ITEM_H - ITEM_H)}px)`;
+  const row=document.getElementById('wheelsRow'); row.innerHTML='';
+  strips=[]; currentIndices=[];
+  currentWheels=mode==='chaos'?CHAOS_WHEELS:GENRES[activeGenre].wheels;
+  currentWheels.forEach((w,wi)=>{
+    const wrap=document.createElement('div'); wrap.className='wheel-wrap';
+    const lbl=document.createElement('div'); lbl.className='wheel-label'; lbl.textContent=w.label;
+    const cont=document.createElement('div'); cont.className='wheel-container';
+    const strip=document.createElement('div'); strip.className='wheel-strip';
+    [...w.items,...w.items,...w.items].forEach(item=>{ const el=document.createElement('div'); el.className='wheel-item'; el.textContent=item; strip.appendChild(el); });
+    const ft=document.createElement('div'); ft.className='wheel-fade-top';
+    const fb=document.createElement('div'); fb.className='wheel-fade-bot';
+    const sel=document.createElement('div'); sel.className='wheel-selector';
+    cont.appendChild(strip); cont.appendChild(sel); cont.appendChild(ft); cont.appendChild(fb);
+    const sb=document.createElement('button'); sb.className='spin-single-btn'; sb.textContent='✦ Spin'; sb.id='sb'+wi; sb.onclick=()=>spinOne(wi);
+    wrap.appendChild(lbl); wrap.appendChild(cont); wrap.appendChild(sb); row.appendChild(wrap);
+    const si=w.items.length+Math.floor(Math.random()*w.items.length);
+    currentIndices[wi]=si;
+    strip.style.transform=`translateY(${-(si*ITEM_H-ITEM_H)}px)`;
     strips.push(strip);
   });
 }
 
 function spinOne(wi) {
-  if (spinning) return;
-  const btn = document.getElementById('singleBtn' + wi);
-  if (btn) btn.disabled = true;
-  document.getElementById('resultBox').style.display = 'none';
-
-  spinWheel(wi, currentWheels[wi].items.length).then(() => {
-    if (btn) btn.disabled = false;
-  });
+  if(spinning) return;
+  const b=document.getElementById('sb'+wi); if(b) b.disabled=true;
+  document.getElementById('resultBox').style.display='none';
+  spinWheel(wi,currentWheels[wi].items.length).then(()=>{ if(b) b.disabled=false; });
 }
 
 function spinAll() {
-  if (spinning) return;
-  spinning = true;
-  document.getElementById('spinAllBtn').disabled = true;
-  document.getElementById('resultBox').style.display = 'none';
-
-  currentWheels.forEach((w, wi) => {
-    const btn = document.getElementById('singleBtn' + wi);
-    if (btn) btn.disabled = true;
-  });
-
-  const promises = currentWheels.map((w, wi) => spinWheel(wi, w.items.length));
-  Promise.all(promises).then(() => {
-    spinning = false;
-    showResult();
-  });
+  if(spinning) return; spinning=true;
+  document.getElementById('spinAllBtn').disabled=true;
+  document.getElementById('resultBox').style.display='none';
+  currentWheels.forEach((w,wi)=>{ const b=document.getElementById('sb'+wi); if(b) b.disabled=true; });
+  Promise.all(currentWheels.map((w,wi)=>spinWheel(wi,w.items.length))).then(()=>{ spinning=false; showResult(); });
 }
 
-function spinWheel(wi, total) {
-  return new Promise(resolve => {
-    const strip = strips[wi];
-    const randomTarget = Math.floor(Math.random() * total);
-    const totalSpins = total * 3 + randomTarget;
-    const duration = 2000 + wi * 150 + Math.random() * 800;
-    const startTime = performance.now();
-    const startIdx = currentIndices[wi];
-    const endIdx = startIdx + totalSpins;
-
-    function ease(t) { return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
-
-    function animate(now) {
-      const elapsed = now - startTime;
-      const progress = Math.min(elapsed / duration, 1);
-      const currentI = startIdx + (endIdx - startIdx) * ease(progress);
-      strip.style.transform = `translateY(${-(currentI * ITEM_H - ITEM_H)}px)`;
-
-      if (progress < 1) {
-        requestAnimationFrame(animate);
-      } else {
-        const finalIdx = endIdx % total;
-        currentIndices[wi] = finalIdx === 0 ? total : finalIdx;
-        strip.style.transform = `translateY(${-(currentIndices[wi] * ITEM_H - ITEM_H)}px)`;
+function spinWheel(wi,total) {
+  return new Promise(resolve=>{
+    const strip=strips[wi];
+    const target=Math.floor(Math.random()*total);
+    const totalSpins=total*3+target;
+    const dur=2000+wi*160+Math.random()*800;
+    const t0=performance.now();
+    const si=currentIndices[wi];
+    const ei=si+totalSpins;
+    function ease(t){ return t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2; }
+    function frame(now){
+      const p=Math.min((now-t0)/dur,1);
+      strip.style.transform=`translateY(${-((si+(ei-si)*ease(p))*ITEM_H-ITEM_H)}px)`;
+      if(p<1){ requestAnimationFrame(frame); }
+      else {
+        const fi=ei%total; currentIndices[wi]=fi===0?total:fi;
+        strip.style.transform=`translateY(${-(currentIndices[wi]*ITEM_H-ITEM_H)}px)`;
         resolve();
       }
     }
-    requestAnimationFrame(animate);
+    requestAnimationFrame(frame);
   });
 }
 
 function showResult() {
-  const parts = currentWheels.map((w, wi) => {
-    const idx = (currentIndices[wi] % w.items.length + w.items.length) % w.items.length;
-    return w.items[idx];
-  });
-
-  document.getElementById('resultGenre').textContent = mode === 'chaos' ? 'All Realms Combined' : activeGenre;
-  document.getElementById('resultName').textContent = parts.join(' ');
-  document.getElementById('resultBox').style.display = 'block';
-  document.getElementById('spinAllBtn').disabled = false;
-
-  currentWheels.forEach((w, wi) => {
-    const btn = document.getElementById('singleBtn' + wi);
-    if (btn) btn.disabled = false;
-  });
-
-  burst();
+  const parts=currentWheels.map((w,wi)=>{ const idx=(currentIndices[wi]%w.items.length+w.items.length)%w.items.length; return w.items[idx]; });
+  document.getElementById('resultGenre').textContent=mode==='chaos'?'All Realms Combined':activeGenre;
+  document.getElementById('resultName').textContent=parts.join(' ');
+  document.getElementById('resultBox').style.display='block';
+  document.getElementById('spinAllBtn').disabled=false;
+  currentWheels.forEach((w,wi)=>{ const b=document.getElementById('sb'+wi); if(b) b.disabled=false; });
+  sparkle();
 }
 
-function burst() {
-  const colors = ['#c9943a','#e8c472','#8b1a1a','#f5e8c8','#7a5a1a'];
-  const cx = window.innerWidth / 2;
-  const cy = window.innerHeight / 2;
-  for (let i = 0; i < 18; i++) {
-    const p = document.createElement('div');
-    p.className = 'particle';
-    const size = 4 + Math.random() * 6;
-    const angle = (i / 18) * Math.PI * 2;
-    const dist = 80 + Math.random() * 120;
-    p.style.cssText = `width:${size}px;height:${size}px;background:${colors[i%colors.length]};left:${cx}px;top:${cy}px;--tx:${Math.cos(angle)*dist}px;--ty:${Math.sin(angle)*dist}px;`;
-    document.body.appendChild(p);
-    setTimeout(() => p.remove(), 900);
+function sparkle() {
+  const cols=['#f0cc72','#c8d8f0','#c4b0f8','#d4a843','#ffffff','#e8d0ff'];
+  for(let i=0;i<20;i++) {
+    setTimeout(()=>{
+      const el=document.createElement('div'); el.className='sparkle';
+      const sz=2+Math.random()*6;
+      const x=W*.2+Math.random()*W*.6, y=H*.25+Math.random()*H*.5;
+      const ang=Math.random()*Math.PI*2, dist=70+Math.random()*160;
+      const col=cols[Math.floor(Math.random()*cols.length)];
+      el.style.cssText=`width:${sz}px;height:${sz}px;background:${col};left:${x}px;top:${y}px;--tx:${Math.cos(ang)*dist}px;--ty:${Math.sin(ang)*dist}px;box-shadow:0 0 ${sz*2}px ${col};`;
+      document.body.appendChild(el);
+      setTimeout(()=>el.remove(),950);
+    },i*45);
   }
 }
 
 function resetAll() {
-  document.getElementById('resultBox').style.display = 'none';
-  document.getElementById('spinAllBtn').disabled = false;
+  document.getElementById('resultBox').style.display='none';
+  document.getElementById('spinAllBtn').disabled=false;
   buildWheels();
 }
 
-buildStars();
 buildTabs();
 buildWheels();
 </script>
